@@ -48,10 +48,10 @@ define('_JSHOP_RABATT_USED', 'Введен использованный диск
 define('_JSHOP_BACK_TO_SHOP', 'Вернуться в магазин');
 define('_JSHOP_HAVE_NOT_ACCOUNT', 'Нет акаунта');
 define('_JSHOP_HAVE_ACCOUNT', 'Авторизоваться, если Вы зарегистрированы');
-define('_JSHOP_REGISTRATION', 'Зарегистрироваться');
+define('_JSHOP_REGISTRATION', 'Регистрация');
 define('_JSHOP_REGISTER', 'Зарегистрируйтесь пожалуйста!');
 define('_JSHOP_PL_LOGIN', 'Введите Ваши данные');
-define('_JSHOP_LOGIN', 'Логин');
+define('_JSHOP_LOGIN', 'Вход в личный кабинет');
 define('_JSHOP_REMEMBER_ME', 'Запомнить меня');
 define('_JSHOP_EMAIL', 'E-mail');
 define('_JSHOP_PASSWORT', 'Пароль');
@@ -135,7 +135,7 @@ define('_JSHOP_USEND_MSG', "Здравствуйте %s,
 
 // Anmeldung
 define('_JSHOP_REG_TITLE', 'Пол');
-define('_JSHOP_USERNAME', 'Логин');
+define('_JSHOP_USERNAME', 'Ваш логин');
 define('_JSHOP_F_NAME', 'Имя');
 define('_JSHOP_L_NAME', 'Фамилия');
 define('_JSHOP_FULL_NAME', 'Полное имя (Ф.И.О.)');

@@ -1,0 +1,14 @@
+2015-11-25 10:37:26 
+Start install: C:\USBWebServer\Root\tmp\JoomShopping-update-4.10.4-4.10.5.zip
+2015-11-25 10:37:26 Archive error
+2015-11-25 10:37:37 
+Start install: C:\USBWebServer\Root\tmp\JoomShopping-update-4.10.4-4.10.5.zip
+2015-11-25 10:37:37 Archive error
+2015-12-03 07:48:12 
+Start install: C:\USBWebServer\Root\tmp\JoomShopping-update-4.11.3-4.11.4.zip
+2015-12-03 07:48:13 Copy file: /administrator/components/com_jshopping/jshopping.xml
+2015-12-03 07:48:13 Copy file: /administrator/components/com_jshopping/controllers/config.php
+2015-12-03 07:48:13 Copy file: /administrator/components/com_jshopping/controllers/orders.php
+2015-12-03 07:48:13 Copy file: /components/com_jshopping/models/ordermail.php
+2015-12-03 07:48:13 Copy file: /components/com_jshopping/models/userguest.php
+2015-12-03 07:48:13 Copy file: /components/com_jshopping/tables/order.php

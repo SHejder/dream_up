@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE install PUBLIC "-//Joomla! 2.5//DTD template 1.0//EN" "http://www.joomla.org/xml/dtd/1.6/template-install.dtd">
+<extension version="2.5" type="template" client="site">
+    <name>NEW_dream_up</name>
+    <creationDate>2018-01-14</creationDate>
+    <author>SHejder</author>
+    <authorEmail></authorEmail>
+    <authorUrl></authorUrl>
+    <copyright></copyright>
+    <license></license>
+    <version>1.0.0</version>
+    <description>TPL_DREAM_XML_DESCRIPTION</description>
+
+    <files>
+        <folder>css</folder>
+        <folder>images</folder>
+        <folder>js</folder>
+        <folder>language</folder>
+        <filename>component.php</filename>
+        <filename>error.php</filename>
+        <filename>favicon.ico</filename>
+        <filename>index.php</filename>
+        <filename>template_preview.png</filename>
+        <filename>template_thumbnail.png</filename>
+        <filename>templateDetails.xml</filename>
+    </files>
+
+    <positions>
+      	<position>klienti</position>
+      	<position>analytics</position>
+		<position>bookmark</position>
+      	<position>navigation</position>
+      	
+		<position>cart</position>
+              <position>breadcrumb</position>
+      		<position>logo</position>
+      <position>last_products </position>
+      <position>bestseller</position>
+        
+
+
+    </positions>
+
+    <languages folder="language">
+        <language tag="en-GB">en-GB/en-GB.tpl_dream.ini</language>
+        <language tag="en-GB">en-GB/en-GB.tpl_dream.sys.ini</language>
+    </languages>
+</extension>

@@ -1,0 +1,163 @@
+/* Here write your custom css style */
+
+.header-wrapper, .body-wrapper
+{
+ background-position: 0 0;
+}
+
+#rt-logo
+{
+ margin: 20px 0 0 0;
+}
+
+#rt-logo p
+{
+ margin-top: 0 !important;
+}
+
+.font-family-helvetica
+{
+ font-family: Georgia, Tahoma, "Times New Roman", Times, serif;
+}
+
+#jshop_search
+{
+ width: 320px;
+ padding: 10px;
+ margin-left: 25px;
+ -webkit-border-radius: 20px;
+ -moz-border-radius: 20px;
+ border-radius: 20px;
+ background: transparent url(../images/spinner.gif) no-repeat scroll;
+}
+
+h1, h2, h3, h4, h5
+{
+ margin: 10px 0;
+}
+
+h3
+{
+ line-height: 19px;
+}
+
+.module-title h2, h3, h4, h5
+{
+ letter-spacing: 0.5px;
+}
+
+.font-size-is-default
+{
+ font-size: 13px !important;
+}
+
+.bd-container #navigation
+{
+ top: 115px !important;
+}
+
+#rt-menu ul.menu li a
+{
+ font-weight: normal;
+}
+
+#rt-menu ul.menu li a:hover
+{
+ background: none;
+}
+
+.rt-container 
+{
+ margin: 0 auto;
+ width: 1100px;
+ padding: 0 20px 0 20px;
+ border-left: #aaaaaa solid 1px;
+ border-right: #aaaaaa solid 1px;
+ -moz-box-shadow: 0 3px 5px #aaaaaa;
+ -webkit-box-shadow: 0 -3px 5px #aaaaaa;
+ box-shadow: 0 3px 5px #aaaaaa;
+}
+
+.rt-container .rt-grid-3
+{
+ left: -872px;
+}
+
+.rt-container .rt-grid-9
+{
+ left: 230px;
+ width: 840px;
+}
+
+.jshop #sort_count
+{
+ margin-bottom: 27px;
+}
+
+#rt-content-bottom .rt-grid-9
+{
+ left: 0;
+ width: 100%;
+}
+
+.rt-container .rt-grid-12
+{
+ width: 1080px;
+}
+
+.copytext, #developed-by, #mxcpr
+{
+ display: none;
+}
+
+#copyright
+{
+ margin-bottom: 2em;
+}
+
+#copyright a:hover
+{
+ color: #000;
+}
+
+.jshop .jshop_list_product .block_product .jshop_img
+{
+ max-height: 180px;
+ max-width: 180px;
+}
+
+.jshop .jshop_list_product .jshop_pagination
+{
+ margin: auto;
+}
+
+.jshop .jshop_list_product .jshop_pagination ul li
+{
+ display: inline-block;
+ margin-left: 1em;
+ margin-right: 1em;
+}
+
+#system-messages .error
+{
+ background: #ff9e9c url('../images/signs/error.png') 3px 3px no-repeat;
+ border: 1px solid red;
+ margin-bottom: 10px;
+ padding-left: 22px;
+}
+
+#system-messages .message
+{
+ background: #a5ffa5 url('../images/signs/message.png') 3px 3px no-repeat;
+ border: 1px solid green;
+ margin-bottom: 10px;
+ padding-left: 22px;
+}
+
+#system-messages .warning
+{
+ background: #ffff6b url('../images/signs/warning.png') 3px 3px no-repeat;
+ border: 1px solid yellow;
+ margin-bottom: 10px;
+ padding-left: 22px;
+}

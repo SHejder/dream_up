@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension version="2.5" type="plugin" group="content">
+		<name>Content - Article3</name>
+		<author>Joomla</author>
+		<creationDate>July 2016</creationDate>
+		<copyright>InMotion Hosting</copyright>
+		<license>GNU General Public License version 2 or later;</license>
+		<authorUrl>http://www.joomla.org</authorUrl>
+		<version>3.11</version>
+		<description>Allow the creation of an article with optional table of contents.</description>
+		<files>
+				<filename plugin="article3">article3.php</filename>
+				<filename>index.html</filename>
+		</files>
+</extension>
+

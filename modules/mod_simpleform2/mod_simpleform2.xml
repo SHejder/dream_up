@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension type="module" version="3.1" client="site" method="upgrade">
+	<name>SimpleForm2</name>
+	<author>ZyX</author>
+	<creationDate>Jan 2010</creationDate>
+	<copyright>Copyright 2010-2017 Micriucov Oleg (ZyX) www.allForJoomla.ru. All rights reserved!</copyright>
+	<license>http://www.allforjoomla.ru/license</license>
+	<authorEmail>info@allforjoomla.ru</authorEmail>
+	<authorUrl>allForJoomla.ru</authorUrl>
+	<version>2.0.16</version>
+	<description>MOD_SIMPLEFORM2_XML_DESCRIPTION</description>
+	<files>
+		<filename module="mod_simpleform2">mod_simpleform2.php</filename>
+		<filename>index.html</filename>
+		<filename>index.php</filename>
+		<folder>helpers</folder>
+        <folder>kcaptcha</folder>
+        <folder>models</folder>
+		<folder>tmpl</folder>
+	</files>
+    <media destination="mod_simpleform2" folder="media">
+		<filename>index.html</filename>
+        <folder>css</folder>
+        <folder>images</folder>
+        <folder>js</folder>
+	</media>
+	<languages folder="language">
+		<language tag="ru-RU">ru-RU/ru-RU.mod_simpleform2.ini</language>
+		<language tag="ru-RU">ru-RU/ru-RU.mod_simpleform2.sys.ini</language>
+		<language tag="en-GB">en-GB/en-GB.mod_simpleform2.ini</language>
+		<language tag="en-GB">en-GB/en-GB.mod_simpleform2.sys.ini</language>
+	</languages>
+	<config>
+		<fields name="params" addfieldpath="/modules/mod_simpleform2/helpers/fields">
+			<fieldset name="basic">
+				<field name="domainKey" size="70" type="sf2keytext" default="" label="MOD_SIMPLEFORM2_DOMAIN_KEY" description="MOD_SIMPLEFORM2_DOMAIN_KEY_DESCR" />
+                <field name="sfMailSubj" size="70" type="text" default="" label="MOD_SIMPLEFORM2_MAIL_SUBJECT" description="MOD_SIMPLEFORM2_MAIL_SUBJECT_DESCR" />
+				<field name="sfMailTo" size="70" type="text" default="admin@yoursite.com" label="MOD_SIMPLEFORM2_RECIEVE_EMAIL" description="MOD_SIMPLEFORM2_RECIEVE_EMAIL_DESCR" />
+				<field name="sfMailReply" size="70" type="text" default="" label="MOD_SIMPLEFORM2_SENDER_EMAIL" description="MOD_SIMPLEFORM2_SENDER_EMAIL_DESCR" />
+                <field name="simpleCode" type="textarea" filter="raw" cols="40" rows="15" default="{form title='Контактная форма' description='Заполните пожалуйста все необходимые поля'}&lt;div class='sf2-form-group'&gt;{element label='Ваше имя' type='text' required='required' error='Введите пожалуйста ваше имя'/}&lt;/div&gt;&lt;div class='sf2-form-group'&gt;{element label='Ваш e-mail' type='email' required='required' error='Введите пожалуйста ваш e-mail'/}&lt;/div&gt;&lt;div class='sf2-form-group'&gt;{element label='Ваше сообщение' type='textarea' required='required' error='Введите пожалуйста ваше сообщение'/}&lt;/div&gt;&lt;div class='sf2-form-group'&gt;{element  type='checkbox' required='required' error='Для отправки данных вы должны дать согласие на их обработку' send-in-email='no'}{option label='Даю согласие на обработку персональных данных' value='ok'/}{/element}&lt;/div&gt;&lt;div class='sf2-form-group'&gt;{element type='submit' value='Отправить'/}&lt;/div&gt;{/form}" label="MOD_SIMPLEFORM2_SIMPLE_CODE" description="MOD_SIMPLEFORM2_SIMPLE_CODE_DESCR" />
+				<field name="sfLayout" type="sf2keylist" default="blocks" label="MOD_SIMPLEFORM2_FORM_LAYOUT" description="MOD_SIMPLEFORM2_FORM_LAYOUT_DESCR">
+                    <option value="blocks">MOD_SIMPLEFORM2_FORM_LAYOUT_BLOCKS</option>
+                    <option value="lines">MOD_SIMPLEFORM2_FORM_LAYOUT_LINES</option>
+                </field>
+                <field name="sfStyle" type="sf2keylist" default="default" label="MOD_SIMPLEFORM2_FORM_STYLE" description="MOD_SIMPLEFORM2_FORM_STYLE_DESCR">
+                    <option value="default">Default</option>
+                    <option value="light">Light</option>
+                    <option value="sky">Sky</option>
+                    <option value="fancy">Fancy</option>
+                    <option value="dark">Dark</option>
+                </field>
+                <field name="sfLayoutMode" type="sf2keylist" default="full-width" label="MOD_SIMPLEFORM2_FORM_LAYOUT_MODE" description="MOD_SIMPLEFORM2_FORM_LAYOUT_MODE_DESCR">
+                    <option value="full-width">MOD_SIMPLEFORM2_FORM_LAYOUT_FULL_WIDTH</option>
+                    <option value="boxed">MOD_SIMPLEFORM2_FORM_LAYOUT_BOXED</option>
+                </field>
+                <field name="okText" type="textarea" filter="raw" cols="40" rows="5" default="&lt;b&gt;Спасибо за ваше сообщение!&lt;/b&gt;&lt;p&gt;Мы скоро с вами свяжемся по тем контактным данным, которые вы указали.&lt;/p&gt;" label="MOD_SIMPLEFORM2_OK_TEXT" description="MOD_SIMPLEFORM2_OK_TEXT_DESCR" />
+			</fieldset>
+            <fieldset name="advanced">
+                <field name="moduleclass_sfx" type="textarea" label="MOD_SIMPLEFORM2_CSS_SUFFIX" description="MOD_SIMPLEFORM2_CSS_SUFFIX_INFO" rows="3"/>
+                <field name="loadScriptsMode" type="list" default="body" label="MOD_SIMPLEFORM2_LOAD_SCRIPTS_MODE" description="MOD_SIMPLEFORM2_LOAD_SCRIPTS_MODE_INFO">
+					<option value="head">MOD_SIMPLEFORM2_DOCUMENT_HEAD</option>
+					<option value="body">MOD_SIMPLEFORM2_DOCUMENT_BODY</option>
+				</field>
+                <field name="userCheckFunc" type="textarea" default="" label="MOD_SIMPLEFORM2_JS_USER_FUNCTION" description="MOD_SIMPLEFORM2_JS_USER_FUNCTION_DESCR" rows="3"/>
+				<field name="userResultFunc" type="textarea" default="" label="MOD_SIMPLEFORM2_JS_USER_RESULT_FUNCTION" description="MOD_SIMPLEFORM2_JS_USER_RESULT_FUNCTION_DESCR" rows="3"/>
+                <field name="layout" type="modulelayout" label="MOD_SIMPLEFORM2_MAIL_TEMPLATE" description="MOD_SIMPLEFORM2_MAIL_TEMPLATE_DESCR" />
+                <field name="cache" type="radio" default="0" label="COM_MODULES_FIELD_CACHING_LABEL" description="COM_MODULES_FIELD_CACHING_DESC" class="btn-group btn-group-yesno">
+					<option value="1">JGLOBAL_USE_GLOBAL</option>
+					<option value="0">COM_MODULES_FIELD_VALUE_NOCACHING</option>
+				</field>
+                <field name="cache_time" type="text" label="COM_MODULES_FIELD_CACHE_TIME_LABEL" description="COM_MODULES_FIELD_CACHE_TIME_DESC" default="900" />
+
+				<field name="cachemode" type="hidden" default="itemid">
+					<option value="itemid"></option>
+				</field>
+            </fieldset>
+            <fieldset name="records" label="MOD_SIMPLEFORM2_DB_RECORDS">
+                <field name="recordForms" type="radio" default="0" label="MOD_SIMPLEFORM2_FIELD_RECORD_FORMS_LABEL" description="MOD_SIMPLEFORM2_FIELD_RECORD_FORMS_DESCR" class="btn-group btn-group-yesno">
+					<option value="1">JYES</option>
+					<option value="0">JNO</option>
+				</field>
+                <field name="recorded_forms" type="sf2records" label="MOD_SIMPLEFORM2_RECORDED_FORMS_LABEL" />
+            </fieldset>
+		</fields>
+	</config>
+	<updateservers>
+		<server type="extension" priority="1" name="AllForJoomla.ru">http://allforjoomla.ru/updates/mod_simpleform2/j3.xml</server>
+	</updateservers>
+</extension>

@@ -88,7 +88,7 @@ $is_home_page = $menu->getActive() == $menu->getDefault($lang->getTag());
                     </div>
                     <jdoc:include type="modules" name="cart"/>
                 </div>
-                <a href="/" class="header-top__logo"><img src="<?php echo $template_url . '/images/logo-header.png' ?>"
+                <a href="<?php echo $this->baseurl ?>" class="header-top__logo"><img src="<?php echo $template_url . '/images/logo-header.png' ?>"
                                                           alt="Интернет-магазин Dream Up — товары для творчества и рукоделия"></a>
             </div>
         </div><!-- header-top end -->

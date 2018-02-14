@@ -9,22 +9,25 @@
 defined('_JEXEC') or die('Restricted access');
 ?>
 <!--<div class = "jshop pagelogin" id="comjshop">    -->
+<?php print $this->checkout_navigator ?>
+
 <h1><?php print _JSHOP_LOGIN ?></h1>
 <div class="ordering">
-    <?php print $this->checkout_navigator ?>
 
     <?php if ($this->config->shop_user_guest && $this->show_pay_without_reg) : ?>
-        <span class="text_pay_without_reg"><?php print _JSHOP_ORDER_WITHOUT_REGISTER_CLICK ?> <a
-                    href="<?php print SEFLink('index.php?option=com_jshopping&controller=checkout&task=step2', 1, 0, $this->config->use_ssl); ?>"><?php print _JSHOP_HERE ?></a></span>
+        <p>Выберите удобный Вам способ оформления заказа:</p>
     <?php endif; ?>
 
     <?php echo $this->tmpl_login_html_1 ?>
-    <div class="row-fluid">
-        <!--        <div class="span6 login_block">-->
-        <?php echo $this->tmpl_login_html_2 ?>
-        <!--            <div class="small_header">--><?php //print _JSHOP_HAVE_ACCOUNT ?><!--</div>-->
-        <!--            <div class="logintext">--><?php //print _JSHOP_PL_LOGIN ?><!--</div>-->
-        <div class="ordering__item">
+    <!--        <div class="span6 login_block">-->
+    <?php echo $this->tmpl_login_html_2 ?>
+    <!--            <div class="small_header">--><?php //print _JSHOP_HAVE_ACCOUNT ?><!--</div>-->
+    <!--            <div class="logintext">--><?php //print _JSHOP_PL_LOGIN ?><!--</div>-->
+    <div class="ordering__item">
+        <?php if ($this->config->shop_user_guest) : ?>
+        <button class="ordering__item-title"><span>У меня уже есть учетная запись</span></button>
+        <div class="ordering__item-content form">
+            <?php endif; ?>
             <form method="post"
                   action="<?php print SEFLink('index.php?option=com_jshopping&controller=user&task=loginsave', 1, 0, $this->config->use_ssl) ?>"
                   name="jlogin" class="form-horizontal">
@@ -54,26 +57,52 @@ defined('_JEXEC') or die('Restricted access');
                 <?php echo JHtml::_('form.token'); ?>
                 <?php echo $this->tmpl_login_html_3 ?>
             </form>
-        </div>
+            <?php if ($this->config->shop_user_guest) : ?>
 
-<!--    </div>-->
-    <div class="span6 register_block">
-        <?php echo $this->tmpl_login_html_4 ?>
-        <?php if ($this->allowUserRegistration) { ?>
-            <span class="small_header"><?php print _JSHOP_HAVE_NOT_ACCOUNT ?>?</span>
-            <div class="logintext"><?php print _JSHOP_REGISTER ?></div>
-            <?php if (!$this->config->show_registerform_in_logintemplate) { ?>
-                <div class="block_button_register">
-                    <input type="button" class="btn button" value="<?php print _JSHOP_REGISTRATION ?>"
-                           onclick="location.href='<?php print $this->href_register ?>';"/>
-                </div>
-            <?php } else { ?>
-                <?php $hideheaderh1 = 1;
-                include(dirname(__FILE__) . "/register.php"); ?>
-            <?php } ?>
-        <?php } ?>
-        <?php echo $this->tmpl_login_html_5 ?>
+        </div>
+    <?php endif; ?>
+
     </div>
-</div>
-    <!--</div>-->
-    <?php echo $this->tmpl_login_html_6 ?>
+    <?php if ($this->config->shop_user_guest) : ?>
+        <div class="ordering__item">
+            <button class="ordering__item-title"><span>Я хочу зарегистрироваться и оформить заказ</span></button>
+            <?php $hideheaderh1 = 1;
+            include(dirname(__FILE__) . "/register.php"); ?>
+        </div>
+    <?php endif; ?>
+    <?php if ($this->config->shop_user_guest) : ?>
+        <div class="ordering__item">
+            <button class="ordering__item-title"><span>Я хочу оформить заказ БЕЗ регистрации</span></button>
+            <div class="ordering__item-content form">
+
+            </div>
+        </div>
+    <?php endif; ?>
+
+
+    <!--    </div>-->
+    <?php if (!$this->config->shop_user_guest) : ?>
+    <div class="ordering__item">
+
+
+        <div class="span6 register_block">
+            <?php echo $this->tmpl_login_html_4 ?>
+            <?php if ($this->allowUserRegistration) { ?>
+                <span class="small_header"><?php print _JSHOP_HAVE_NOT_ACCOUNT ?>?</span>
+                <div class="logintext"><?php print _JSHOP_REGISTER ?></div>
+                <?php if (!$this->config->show_registerform_in_logintemplate) { ?>
+                    <div class="block_button_register">
+                        <input type="button" class="btn button" value="<?php print _JSHOP_REGISTRATION ?>"
+                               onclick="location.href='<?php print $this->href_register ?>';"/>
+                    </div>
+                <?php } else { ?>
+                    <?php $hideheaderh1 = 1;
+                    include(dirname(__FILE__) . "/register.php"); ?>
+                <?php } ?>
+            <?php } ?>
+            <?php echo $this->tmpl_login_html_5 ?>
+        </div>
+        <?php endif; ?>
+
+        <!--</div>-->
+        <?php echo $this->tmpl_login_html_6 ?>

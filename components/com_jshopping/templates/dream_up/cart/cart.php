@@ -1,8 +1,11 @@
 <?php
 defined('_JEXEC') or die();
 $countprod = count($this->products);
+$session = JFactory::getSession();
+
 ?>
 <h1>Корзина</h1>
+
 
 <div class="cart">
     <form action="<?php print SEFLink('index.php?option=com_jshopping&controller=cart&task=refresh'); ?>"
@@ -150,6 +153,8 @@ $countprod = count($this->products);
     <div class="cart__info-item -min-cost<?php if ($this->summ < $min_order_summ) echo ' min_order_summ'; ?>"><?php print $this->cartdescr; ?></div>
     <?php } else { ?>
         <div class="cart_empty_text"><?php print _JSHOP_CART_EMPTY; ?></div>
+        <?php $session->set('show_pay_without_reg', 0); ?>
+        <?php $session->set('cart',null); ?>
     <?php } ?>
     <?php if ($this->config->summ_null_shipping > 0 && $min_order_summ != 0) { ?>
         <div class="cart__info-item -free-deliver"><?php printf(_JSHOP_FROM_PRICE_SHIPPING_FREE, formatprice($this->config->summ_null_shipping, null, 1)); ?></div>
@@ -179,3 +184,4 @@ $countprod = count($this->products);
 
     </form>
 <?php } ?>
+

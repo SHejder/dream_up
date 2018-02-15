@@ -14,7 +14,7 @@
                          title="<?php print htmlspecialchars($product->name); ?>"/>
                 </a>
                 <?php } ?>
-                <a href="<?php print $product->product_link ?>" class="product__quick-show">Быстрый просмотр</a>
+                <a href="<?php print $product->product_link ?>" class="product__quick-show ajax">Быстрый просмотр</a>
                 <?php print $product->_tmp_var_bottom_foto; ?>
 
             </div>

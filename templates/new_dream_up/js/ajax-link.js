@@ -18,15 +18,17 @@ $(document).ready(function () {
                 if (html) {
                     var $html = $(html);
                     var $replacement = $html.is('.product-cart') ? $html : $html.find('.product-cart:first');
-                    console.log($replacement[0]);
+                    var $heading = $html.is('h1') ? $html : $html.find('h1:first');
+                    console.log($heading[0]);
                     $('body').append(
                     '<div class="overlay -quick-veiw">'+
                         '<button class="overlay__bg"></button>'+
                         '<div class="overlay__center">'+
                         '<button class="overlay__close">Закрыть</button>'+
+                        '<p class="overlay__heading">'+
+                        $heading[0].innerHTML+
+                        '</p>'+
                         '<div class="overlay__content">'+
-
-
                         $replacement[0].innerHTML +
                         '</div>' +
                         '</div>'+

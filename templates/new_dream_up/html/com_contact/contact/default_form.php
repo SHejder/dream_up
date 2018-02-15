@@ -13,33 +13,44 @@ JHtml::_('behavior.keepalive');
 JHtml::_('behavior.formvalidator');
 
 ?>
-<div class="contact-form">
-	<form id="contact-form" action="<?php echo JRoute::_('index.php'); ?>" method="post" class="form-validate form-horizontal well">
-		<?php foreach ($this->form->getFieldsets() as $fieldset) : ?>
-			<?php if ($fieldset->name === 'captcha' && !$this->captchaEnabled) : ?>
-				<?php continue; ?>
-			<?php endif; ?>
-			<?php $fields = $this->form->getFieldset($fieldset->name); ?>
-			<?php if (count($fields)) : ?>
-				<fieldset>
-					<?php if (isset($fieldset->label) && ($legend = trim(JText::_($fieldset->label))) !== '') : ?>
-						<legend><?php echo $legend; ?></legend>
-					<?php endif; ?>
-					<?php foreach ($fields as $field) : ?>
-						<?php echo $field->renderField(); ?>
-					<?php endforeach; ?>
-				</fieldset>
-			<?php endif; ?>
-		<?php endforeach; ?>
-		<div class="control-group">
-			<div class="controls">
-				<button class="btn btn-primary validate" type="submit"><?php echo JText::_('COM_CONTACT_CONTACT_SEND'); ?></button>
-				<input type="hidden" name="option" value="com_contact" />
-				<input type="hidden" name="task" value="contact.submit" />
-				<input type="hidden" name="return" value="<?php echo $this->return_page; ?>" />
-				<input type="hidden" name="id" value="<?php echo $this->contact->slug; ?>" />
-				<?php echo JHtml::_('form.token'); ?>
-			</div>
-		</div>
-	</form>
-</div>
+<div class="contacts__form form">
+    <h2>Остались вопросы? Напишите нам!</h2>
+    <form action="<?php echo JRoute::_('index.php'); ?>" method="post" class="form-validate form-horizontal well">
+        <div class="col-1">
+            <div class="form__item -name has-content">
+                <label for="form__item-name">Ваше имя</label>
+                <input name="jform[contact_name]" type="text" id="form__item-name" placeholder="Имя">
+                <div class="form__item-error"></div>
+            </div>
+            <div class="form__item -email-phone">
+                <label for="form__item-email-phone">Email*</label>
+                <input type="email" name="jform[contact_email]" id="form__item-email-phone"
+                       placeholder="Email или телефон">
+                <!--            <div class="error"><ul><li>Неверный формат</li></ul></div>-->
+            </div>
+        </div>
+        <div class="col-2">
+            <div class="form__item -text">
+                <label for="form__item-text">Сообщение</label>
+                <textarea name="jform[contact_message]" placeholder="Сообщение" id="form__item-text"></textarea>
+                <div class="form__item-error"></div>
+            </div>
+        </div>
+        <div class="col-3">
+            <div class="custom-checkbox">
+                <label for="app_sample_choice_privacy-policy-3" class="required">
+                    <input type="checkbox" id="app_sample_choice_privacy-policy-3" value="1" required="" checked="">
+                    <span>Я согласен на обработку персональных данных. <a href="">Политика конфиденциальности</a></span>
+                </label>
+            </div>
+            <button class="contacts__form-btn btn" type="submit">Отправить</button>
+            <input type="hidden" name="option" value="com_contact"/>
+            <input type="hidden" name="task" value="contact.submit"/>
+            <input type="hidden" name="return" value="<?php echo $this->return_page; ?>"/>
+            <input type="hidden" name="id" value="<?php echo $this->contact->slug; ?>"/>
+            <?php echo JHtml::_('form.token'); ?>
+        </div>
+    </form>
+
+</div><!-- homepage-bottom__form end -->
+

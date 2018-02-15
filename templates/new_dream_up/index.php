@@ -146,45 +146,23 @@ $is_home_page = $menu->getActive() == $menu->getDefault($lang->getTag());
         </div>
         <div class="header-mobile__switch-elements">
             <div class="header-mobile__element -user">
-                <!--авторизованый пользователь--><!--
-                    <div class="header-top__sing-in-wrap">Здравствуйте, User1234567890!</div>
+                <?php if ($user->get('id')) { ?>
+                <div class="header-top__sing-in-wrap">Здравствуйте, <?php echo $user->get('username') ?></div>
                     <nav class="menu-top">
                         <ul>
-                            <li><a href="">Профиль</a></li>
-                            <li><a href="">Мои заказы</a></li>
-                            <li><a href="">Выход </a></li>
+                            <li><a href="/vkhod-v-lichnyj-kabinet/myaccount">Профиль</a></li>
+                            <li><a href="/vkhod-v-lichnyj-kabinet/orders">Мои заказы</a></li>
+                            <li><a href="/" >Выход </a></li>
                         </ul>
                     </nav>
-                    <!--авторизованый пользователь end -->
+                <?php } else {?>
+
                 <div class="header-mobile__form form">
                     <p class="header-mobile__form-title">Авторизация</p>
-                    <form action="">
-                        <div class="form__item -name has-content">
-                            <label>Ваше логин</label>
-                            <input type="text" placeholder="Логин">
-                            <div class="form__item-error"></div>
-                        </div>
-                        <div class="form__item -email-password">
-                            <label>Пароль</label>
-                            <input type="email" placeholder="Пароль">
-                            <div class="error">
-                                <ul>
-                                    <li>Неверный пароль</li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="custom-checkbox">
-                            <label class="required">
-                                <input type="checkbox" value="1" required="" checked="">
-                                <span>Запомнить меня</span>
-                            </label>
-                        </div>
-                        <button class="homepage-bottom__form-btn btn" type="submit">Отправить</button>
-                        <br>
-                        <p>У вас нет аккаунта? <br>
-                            <a href="">Зарегистрируйтесь</a>, пожалуйста.</p>
-                    </form>
-                </div><!-- homepage-bottom__form end -->
+                    <jdoc:include type="modules" name="klienti"/>
+                </div>
+                <?php } ?>
+                <!-- homepage-bottom__form end -->
             </div>
             <div class="header-mobile__element -phone"></div>
             <div class="header-mobile__element -search"></div>

@@ -12,10 +12,16 @@ $db->setQuery($q);
 $data_row = $db->loadObjectList();
 $data_row = listProductUpdateData($data_row);
 
+addLinkToProducts($data_row, 0, 1);
+
+
 ?>
+<!--        --><?php //var_dump($data_row)?>
+
 <div class="product-carousel__carousel owl-carousel">
     <?php foreach ($data_row as $product) { ?>
-                <div class="product-carousel__item product">
+
+        <div class="product-carousel__item product">
                     <?php if ($show_image && $product->image){// option modul  show_image ?>
                     <div class="product__img">
 
@@ -27,7 +33,7 @@ $data_row = listProductUpdateData($data_row);
                                  title="<?php print htmlspecialchars($product->name); ?>"/>
                         </a>
                         <?php } ?>
-                        <a href="<?php print $product->product_link ?>" class="product__quick-show">Быстрый просмотр</a>
+                        <a href="<?php print $product->product_link ?>" class="product__quick-show ajax">Быстрый просмотр</a>
                         <?php print $product->_tmp_var_bottom_foto; ?>
 
                     </div>

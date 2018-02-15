@@ -185,12 +185,12 @@ class ContactControllerContact extends JControllerForm
 
 			$name    = $data['contact_name'];
 			$email   = JStringPunycode::emailToPunycode($data['contact_email']);
-			$subject = $data['contact_subject'];
+			$subject = '';
 			$body    = $data['contact_message'];
 
 			// Prepare email body
 			$prefix = JText::sprintf('COM_CONTACT_ENQUIRY_TEXT', JUri::base());
-			$body   = $prefix . "\n" . $name . ' <' . $email . '>' . "\r\n\r\n" . stripslashes($body);
+			$body   = $prefix . "\n"."Имя: " . $name ."\n". 'Почта: ' . $email .  "\r\n\r\n" . stripslashes($body);
 
 			// Load the custom fields
 			if ($data['com_fields'] && $fields = FieldsHelper::getFields('com_contact.mail', $contact, true, $data['com_fields']))

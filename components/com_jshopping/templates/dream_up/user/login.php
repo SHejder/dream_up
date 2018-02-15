@@ -12,6 +12,8 @@ defined('_JEXEC') or die('Restricted access');
 <?php print $this->checkout_navigator ?>
 
 <h1><?php print _JSHOP_LOGIN ?></h1>
+
+
 <div class="ordering">
 
     <?php if ($this->config->shop_user_guest && $this->show_pay_without_reg) : ?>
@@ -24,7 +26,7 @@ defined('_JEXEC') or die('Restricted access');
     <!--            <div class="small_header">--><?php //print _JSHOP_HAVE_ACCOUNT ?><!--</div>-->
     <!--            <div class="logintext">--><?php //print _JSHOP_PL_LOGIN ?><!--</div>-->
     <div class="ordering__item">
-        <?php if ($this->config->shop_user_guest) : ?>
+        <?php if ($this->config->shop_user_guest && $this->show_pay_without_reg) : ?>
         <button class="ordering__item-title"><span>У меня уже есть учетная запись</span></button>
         <div class="ordering__item-content form">
             <?php endif; ?>
@@ -57,20 +59,20 @@ defined('_JEXEC') or die('Restricted access');
                 <?php echo JHtml::_('form.token'); ?>
                 <?php echo $this->tmpl_login_html_3 ?>
             </form>
-            <?php if ($this->config->shop_user_guest) : ?>
+            <?php if ($this->config->shop_user_guest && $this->show_pay_without_reg) : ?>
 
         </div>
     <?php endif; ?>
 
     </div>
-    <?php if ($this->config->shop_user_guest) : ?>
+    <?php if ($this->config->shop_user_guest && $this->show_pay_without_reg) : ?>
         <div class="ordering__item">
             <button class="ordering__item-title"><span>Я хочу зарегистрироваться и оформить заказ</span></button>
             <?php $hideheaderh1 = 1;
             include(dirname(__FILE__) . "/register.php"); ?>
         </div>
     <?php endif; ?>
-    <?php if ($this->config->shop_user_guest) : ?>
+    <?php if ($this->config->shop_user_guest && $this->show_pay_without_reg) : ?>
         <div class="ordering__item">
             <button class="ordering__item-title"><span>Я хочу оформить заказ БЕЗ регистрации</span></button>
             <div class="ordering__item-content form">
@@ -79,13 +81,11 @@ defined('_JEXEC') or die('Restricted access');
         </div>
     <?php endif; ?>
 
+    <?php if ($this->config->shop_user_guest && !$this->show_pay_without_reg) : ?>
+        <!--    </div>-->
+        <div class="ordering__item">
 
-    <!--    </div>-->
-    <?php if (!$this->config->shop_user_guest) : ?>
-    <div class="ordering__item">
 
-
-        <div class="span6 register_block">
             <?php echo $this->tmpl_login_html_4 ?>
             <?php if ($this->allowUserRegistration) { ?>
                 <span class="small_header"><?php print _JSHOP_HAVE_NOT_ACCOUNT ?>?</span>
@@ -102,7 +102,8 @@ defined('_JEXEC') or die('Restricted access');
             <?php } ?>
             <?php echo $this->tmpl_login_html_5 ?>
         </div>
-        <?php endif; ?>
+    <?php endif; ?>
 
-        <!--</div>-->
-        <?php echo $this->tmpl_login_html_6 ?>
+
+    <!--</div>-->
+    <?php echo $this->tmpl_login_html_6 ?>

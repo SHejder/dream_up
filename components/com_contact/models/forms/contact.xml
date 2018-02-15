@@ -32,17 +32,17 @@
 			required="true"
 		/>
 
-		<field
-			name="contact_subject"
-			type="text"
-			label="COM_CONTACT_CONTACT_MESSAGE_SUBJECT_LABEL"
-			description="COM_CONTACT_CONTACT_MESSAGE_SUBJECT_DESC"
-			id="contact-emailmsg"
-			size="60"
-			filter="string"
-			validate="contactemailsubject"
-			required="true"
-		/>
+		<!--<field-->
+			<!--name="contact_subject"-->
+			<!--type="text"-->
+			<!--label="COM_CONTACT_CONTACT_MESSAGE_SUBJECT_LABEL"-->
+			<!--description="COM_CONTACT_CONTACT_MESSAGE_SUBJECT_DESC"-->
+			<!--id="contact-emailmsg"-->
+			<!--size="60"-->
+			<!--filter="string"-->
+			<!--validate="contactemailsubject"-->
+			<!--required="true"-->
+		<!--/>-->
 
 		<field
 			name="contact_message"

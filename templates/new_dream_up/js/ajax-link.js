@@ -1,9 +1,9 @@
-$(document).ready(function () {
-    $('body')
+jQuery(document).ready(function () {
+    jQuery('body')
         .on('click', 'a[href].ajax', function (e) {
             e.preventDefault();
 
-            var $link = $(this);
+            var $link = jQuery(this);
 
             if ($link.data('clicked')) {
                 return;
@@ -12,15 +12,15 @@ $(document).ready(function () {
             var linkContent = $link.html();
             $link.data('clicked', true).html(AJAX_LOADER);
 
-            $.ajax({
+            jQuery.ajax({
                 url: $link.attr('href')
             }).done(function (html) {
                 if (html) {
-                    var $html = $(html);
+                    var $html = jQuery(html);
                     var $replacement = $html.is('.product-cart') ? $html : $html.find('.product-cart:first');
                     var $heading = $html.is('h1') ? $html : $html.find('h1:first');
                     console.log($heading[0]);
-                    $('body').append(
+                    jQuery('body').append(
                     '<div class="overlay -quick-veiw">'+
                         '<button class="overlay__bg"></button>'+
                         '<div class="overlay__center">'+
@@ -79,25 +79,25 @@ $(document).ready(function () {
         })
         .on('click', '#window', function (e) {
             if (e.target === this) {
-                $(this).find('.window__close:first').trigger('click');
+                jQuery(this).find('.window__close:first').trigger('click');
             }
         })
         .on('click', '.window__close', function (e) {
             e.preventDefault();
 
-            $('#window').remove();
-            $('.overlay_dark').remove();
+            jQuery('#window').remove();
+            jQuery('.overlay_dark').remove();
         })
         .on('click', '.overlay_dark', function (e) {
             if (e.target === this) {
-                $('body').find('#overlay_close').trigger('click');
-                $('.overlay_dark').remove();
+                jQuery('body').find('#overlay_close').trigger('click');
+                jQuery('.overlay_dark').remove();
             }
         })
         .on('click', '#window .window__close', function (e) {
             e.preventDefault();
 
-            $('#window').remove();
-            $('.overlay_dark').remove();
+            jQuery('#window').remove();
+            jQuery('.overlay_dark').remove();
         });
 });

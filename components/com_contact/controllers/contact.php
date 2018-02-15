@@ -210,7 +210,7 @@ class ContactControllerContact extends JControllerForm
 			$mail->addRecipient($contact->email_to);
 			$mail->addReplyTo($email, $name);
 			$mail->setSender(array($mailfrom, $fromname));
-			$mail->setSubject($sitename . ': ' . $subject);
+			$mail->setSubject($sitename );
 			$mail->setBody($body);
 			$sent = $mail->Send();
 

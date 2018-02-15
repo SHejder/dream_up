@@ -25,7 +25,7 @@ JHtml::_('behavior.formvalidator');
             <div class="form__item -email-phone">
                 <label for="form__item-email-phone">Email*</label>
                 <input type="email" name="jform[contact_email]" id="form__item-email-phone"
-                       placeholder="Email или телефон">
+                       placeholder="Email">
                 <!--            <div class="error"><ul><li>Неверный формат</li></ul></div>-->
             </div>
         </div>

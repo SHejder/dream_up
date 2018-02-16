@@ -14,11 +14,11 @@ defined('_JEXEC') or die('Restricted access');
         <!--        --><?php //if ($k % $this->count_product_to_row == 0) : ?>
         <!--        --><?php //endif; ?>
 
-<!--        <div class="sblock--><?php //echo $this->count_product_to_row; ?><!--">-->
-            <div class="catalog__item">
-                <?php include(dirname(__FILE__) . "/" . $product->template_block_product); ?>
-            </div>
-<!--        </div>-->
+        <!--        <div class="sblock--><?php //echo $this->count_product_to_row; ?><!--">-->
+        <div class="catalog__item">
+            <?php include(dirname(__FILE__) . "/" . $product->template_block_product); ?>
+        </div>
+        <!--        </div>-->
 
         <?php if ($k % $this->count_product_to_row == $this->count_product_to_row - 1) : ?>
         <?php endif; ?>

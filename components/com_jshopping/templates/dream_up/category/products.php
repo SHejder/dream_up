@@ -9,7 +9,6 @@
 defined('_JEXEC') or die('Restricted access');
 ?>
 <?php if ($this->display_list_products){?>
-<div class="jshop_list_product">    
 <?php
     include(dirname(__FILE__)."/../".$this->template_block_form_filter);
     if (count($this->rows)){
@@ -21,5 +20,4 @@ defined('_JEXEC') or die('Restricted access');
         include(dirname(__FILE__)."/../".$this->template_block_pagination);
     }
 ?>
-</div>
 <?php }?>

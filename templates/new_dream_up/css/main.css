@@ -1138,6 +1138,7 @@ table.cellpading_15 td, table.cellpading_15 th {
   border-bottom: 1px dotted #0095bb;
   -webkit-transition: .3s;
   transition: .3s;
+  cursor: pointer;
 }
 
 @media (max-width: 980px) {

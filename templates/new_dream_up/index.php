@@ -10,7 +10,6 @@ $template_url = $this->baseurl . '/templates/' . $this->template;
 $doc->addStyleSheet($template_url . '/css/vendor.min.css');
 $doc->addStyleSheet($template_url . '/css/ui.min.css');
 $doc->addStyleSheet($template_url . '/css/main.css');
-//$doc->addStyleSheet($template_url . '/css/jquery.fancybox.css');
 
 $is_home_page = $menu->getActive() == $menu->getDefault($lang->getTag());
 
@@ -26,9 +25,6 @@ $is_home_page = $menu->getActive() == $menu->getDefault($lang->getTag());
     <!--[if lt IE 9]>
     <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
-<!--    <script src="--><?php //echo $template_url . '/js/jquery.fancybox.pack.js' ?><!--"></script>-->
-<!--    <script src="--><?php //echo $template_url . '/js/jquery.fancybox.js' ?><!--"></script>-->
-<!--    <script src="--><?php //echo $template_url . '/js/js.js' ?><!--"></script>-->
 
 </head>
 <body class="homepage">
@@ -41,7 +37,8 @@ $is_home_page = $menu->getActive() == $menu->getDefault($lang->getTag());
                 <div class="header-top__left-block">
                     <div class="header-top__phone">
                         <a class="header-top__phone-number" href="tel:+79101855497">+7 (910) 185-54-97</a>
-                        <a class="header-top__phone-call" href="">Заказать обратный звонок</a>
+<!--                        <a class="header-top__phone-call" href="">Заказать обратный звонок</a>-->
+                        <jdoc:include type="modules" name="call_back"/>
                     </div>
                     <div class="header-top__work-time">
                         Пн-Пт с 10<sup>00</sup> до 20<sup>00</sup>

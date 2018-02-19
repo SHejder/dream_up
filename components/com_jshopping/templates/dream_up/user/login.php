@@ -96,7 +96,7 @@ defined('_JEXEC') or die('Restricted access');
                     </div>
 <!--                    <div class="block_button_register">-->
 <!--                        <input type="button" class="btn button" value="--><?php //print _JSHOP_REGISTRATION ?><!--"-->
-<!--                               onclick="location.href='--><?php //print $this->href_register ?>
+<!--                               onclick="location.href=syh'--><?php //print $this->href_register ?>
 <!--                    ';"/>-->
 <!--                   </div>-->
                 <?php } else { ?>

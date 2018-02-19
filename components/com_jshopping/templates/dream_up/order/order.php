@@ -48,13 +48,17 @@ $order = $this->order;
         <?php
         $i = 1;
         $countprod = count($order->items);
+        addLinkToProducts($order->items, 0, 1);
+
         foreach ($order->items as $key_id => $prod) {
             $files = unserialize($prod->files);
+             var_dump($prod);
             ?>
 
             <tr>
-                <td data-text="Изображение:"><a href="" class="cart__prev"><img src="" alt=""></a></td>
-                <td data-text="Название:"><a href="" class="cart__name"><?php print $prod->product_name ?></a></td>
+                <td data-text="Изображение:"><a href="<?php print $prod->product_link ?>" class="cart__prev">
+                        <img src="<?php print $this->image_path."/". $prod->thumb_image ?>" alt=""></a></td>
+                <td data-text="Название:"><a href="<?php print $prod->product_link ?>" class="cart__name"><?php print $prod->product_name ?></a></td>
                 <td data-text="Цена за единицу:"><?php print formatprice($prod->product_item_price, $order->currency_code) ?>
                     <?php print $prod->_ext_price_html ?></td>
                 <td data-text="Кол-во:">

@@ -52,7 +52,6 @@ $order = $this->order;
 
         foreach ($order->items as $key_id => $prod) {
             $files = unserialize($prod->files);
-             var_dump($prod);
             ?>
 
             <tr>

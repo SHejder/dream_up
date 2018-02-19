@@ -13,6 +13,13 @@ include(dirname(__FILE__) . "/editaccount.js.php");
 $uri =& JFactory::getURI();
 $url = $uri->toString(array('path', 'query', 'fragment'));
 $user = JFactory::getUser();
+$model = JSFactory::getModel('userOrders', 'jshop');
+
+JshopHelpersMetadata::userOrders();
+
+$model->setUserId(JFactory::getUser()->id);
+$orders = $model->getListOrders();
+
 ?>
 <h1>Личный кабинет</h1>
 <nav class="lk-menu">
@@ -22,7 +29,7 @@ $user = JFactory::getUser();
                href="/vkhod-v-lichnyj-kabinet/myaccount"><?php print _JSHOP_EDIT_DATA ?></a>
         </li>
         <li>
-            <a href="<?php print $this->href_show_orders ?>"><?php print _JSHOP_SHOW_ORDERS ?> ( <?php echo count($this->orders);?> ) </a>
+            <a href="<?php print $this->href_show_orders ?>"><?php print _JSHOP_SHOW_ORDERS ?> ( <?php echo count($orders);?> ) </a>
         </li>
         <li>
             <a href="<?php print $this->href_logout ?>"><?php print _JSHOP_LOGOUT ?></a>

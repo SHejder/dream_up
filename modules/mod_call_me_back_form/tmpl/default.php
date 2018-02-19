@@ -67,8 +67,9 @@ $input_phone_required = $params->get('input_phone_required');
 
 <?php if ( $use_as != 'inline-form' ) : ?>
 <!--    <button id="cmbf-button-container---><?php //echo $id_module; ?><!--" class="cmbf-button-container cmbf---><?php //echo $use_as; ?><!--">--><?php //echo $params->get('button_name'); ?><!--</button>-->
-    <a id="cmbf-button-container-<?php echo $id_module; ?>" class="header-top__phone-call"><?php echo $params->get('button_name'); ?></a>
-    <div class="cmbf-obfuscator" id="cmbf-obfuscator-<?php echo $id_module; ?>"></div>
+ <!--   <a id="cmbf-button-container-<?php echo $id_module; ?>" class="header-top__phone-call"><?php echo $params->get('button_name'); ?></a>
+    <div class="cmbf-obfuscator" id="cmbf-obfuscator-<?php echo $id_module; ?>"></div> -->
+	<a class="header-top__phone-call js-callback" href="#">Заказать обратный звонок</a>
 <?php endif; ?>
 
 

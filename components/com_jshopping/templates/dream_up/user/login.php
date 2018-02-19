@@ -88,13 +88,17 @@ defined('_JEXEC') or die('Restricted access');
 
             <?php echo $this->tmpl_login_html_4 ?>
             <?php if ($this->allowUserRegistration) { ?>
-                <span class="small_header"><?php print _JSHOP_HAVE_NOT_ACCOUNT ?>?</span>
-                <div class="logintext"><?php print _JSHOP_REGISTER ?></div>
                 <?php if (!$this->config->show_registerform_in_logintemplate) { ?>
-                    <div class="block_button_register">
-                        <input type="button" class="btn button" value="<?php print _JSHOP_REGISTRATION ?>"
-                               onclick="location.href='<?php print $this->href_register ?>';"/>
+                    <span class="small_header"><?php print _JSHOP_HAVE_NOT_ACCOUNT ?>?</span>
+                    <div class="logintext">
+                        <a href="<?php print $this->href_register ?>">Зарегистрируйтесь</a> пожалуйста!
+<!--                        --><?php //print _JSHOP_REGISTER ?>
                     </div>
+<!--                    <div class="block_button_register">-->
+<!--                        <input type="button" class="btn button" value="--><?php //print _JSHOP_REGISTRATION ?><!--"-->
+<!--                               onclick="location.href='--><?php //print $this->href_register ?>
+<!--                    ';"/>-->
+<!--                   </div>-->
                 <?php } else { ?>
                     <?php $hideheaderh1 = 1;
                     include(dirname(__FILE__) . "/register.php"); ?>

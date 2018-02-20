@@ -286,27 +286,8 @@
                     } else {
                         onCompleteHandler.call(self, data, items);
                     }
-                    // masonry.masonry('destroy');
-                    // masonry = jQuery('.news-page').masonry({
-                    //     // set itemSelector so .grid-sizer is not used in layout
-                    //     itemSelector: '.news-page__item',
-                    //     // use element for option
-                    //     columnWidth: '.news-page__sizer',
-                    //     percentPosition: true,
-                    //     gutter: 10
-                    // });
-                    //
-                    // masonry.imagesLoaded().progress( function() {
-                    //     masonry.masonry('layout');
-                    // });
-                    // wrap content in jQuery object
-                    // var $content = $( content );
-                    // add jQuery object
-                    // masonry.append( $content ).masonry( 'appended', $content );
                 }
             }, 'html');
-
-
         }
 
         /**
@@ -398,15 +379,14 @@
          */
         function get_trigger(callback)
         {
-
-            var trigger = $('.news-page__btn');
+            var trigger = $('.ias_trigger');
 
             if (trigger.size() === 0) {
-                trigger = $('<button class="news-page__btn btn" >' + opts.trigger + '</button>');
+                trigger = $('<div class="ias_trigger"><a class="news-page__btn btn" href="#">' + opts.trigger + '</a></div>');
                 trigger.hide();
             }
 
-            $(trigger)
+            $('a', trigger)
                 .unbind('click')
                 .bind('click', function () { remove_trigger(); callback.call(); return false; })
             ;
@@ -426,8 +406,7 @@
                 opts.customTriggerProc(trigger);
             } else if ($(opts.next).attr('href')){
                 el = $(opts.container).find(opts.item).last();
-                console.log(trigger);
-                el.parent().after(trigger);
+                el.after(trigger);
                 trigger.fadeIn();
             }  else {
                 loader.fadeOut();
@@ -487,7 +466,6 @@
         {
             $(window).load(function () {
                 wndIsLoaded = true;
-
             });
         }
 

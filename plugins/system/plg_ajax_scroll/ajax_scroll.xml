@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension version="2.5" type="plugin" group="system" method="upgrade">
+  <name>plg_system_ajax_scroll</name>
+  <author>ELLE</author>
+  <creationDate>03.03.2015</creationDate>
+  <copyright>© 2013. All rights reserved.</copyright>
+  <license>GNU/GPL v.3 or later.</license>
+  <authorEmail>suport@joomext.ru</authorEmail>
+  <authorUrl>joomext.ru</authorUrl>
+  <version>1.3</version>
+  <description>PLG_AJAX_SCROLL_XML_DESCRIPTION</description>
+  <files>
+    <filename plugin="ajax_scroll">ajax_scroll.php</filename>
+    <filename>index.html</filename>
+  </files>
+   <media destination="ajax_scroll" folder="media">
+        <filename>index.html</filename>
+        <folder>assets</folder>
+    </media>
+  <languages folder="language">
+    <language tag="en-GB">en-GB/en-GB.plg_system_ajax_scroll.ini</language>
+    <language tag="en-GB">en-GB/en-GB.plg_system_ajax_scroll.sys.ini</language>
+    <language tag="ru-RU">ru-RU/ru-RU.plg_system_ajax_scroll.ini</language>
+    <language tag="ru-RU">ru-RU/ru-RU.plg_system_ajax_scroll.sys.ini</language>
+  </languages>
+  <config>
+    <fields name="params">
+      <fieldset name="basic">
+         <field name="container" type="text" default="#container" label="PLG_AJAX_SCROLL_CONTAINER" description="PLG_AJAX_SCROLL_CONTAINER_DESC" size="30" />
+         <field name="item" type="text" default=".item" label="PLG_AJAX_SCROLL_ITEM" description="PLG_AJAX_SCROLL_ITEM_DESC" size="30" />
+         <field name="pagination" type="text" default=".pagination" label="PLG_AJAX_SCROLL_PAGINATION" description="PLG_AJAX_SCROLL_PAGINATION_DESC" size="30" />
+         <field name="next" type="text" default=".pagination-next a" label="PLG_AJAX_SCROLL_NEXT" description="PLG_AJAX_SCROLL_NEXT_DESC" size="30" />
+         <field name="triggerPageThreshold" type="list" default="1" label="PLG_AJAX_SCROLL_THRESHOLD" description="PLG_AJAX_SCROLL_THRESHOLD_DESC">
+            <option value="0">PLG_AJAX_SCROLL_THRESHOLD_BUTTON</option>
+            <option value="1">PLG_AJAX_SCROLL_THRESHOLD_AUTO</option>
+        </field>
+        <field name="none" type="text" default="no more" label="PLG_AJAX_SCROLL_NONE" description="PLG_AJAX_SCROLL_NONE_DESC" size="30" />
+		<field name="more" type="text" default="load more items" label="PLG_AJAX_SCROLL_MORE" description="PLG_AJAX_SCROLL_MORE_DESC" size="30" />
+        <field name="jquery" type="text" default="" label="PLG_AJAX_SCROLL_JQUERY" description="PLG_AJAX_SCROLL_JQUERY_DESC" size="30" />
+        <field name="onrendercomplete" type="textarea" default="" label="PLG_AJAX_SCROLL_INIT_JS" description="PLG_AJAX_SCROLL_INIT_JS_DESC" rows="10" cols="5" />
+        <field name="urlrules" type="textarea" default="" label="PLG_AJAX_SCROLL_URL_PARAMETR_ALLOW" description="PLG_AJAX_SCROLL_URL_PARAMETR_ALLOW_DESC" rows="10" cols="5" />
+        <field name="mobile" type="radio" default="1" label="PLG_AJAX_SCROLL_DISABLE_MOBILE" description="">
+            <option value="0">JNO</option>
+            <option value="1">JYES</option>
+        </field>
+      </fieldset>
+    </fields>
+  </config>
+</extension>

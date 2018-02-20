@@ -18,11 +18,9 @@ JHtml::addIncludePath(JPATH_COMPONENT.'/helpers/html');
 <?php if ($displayData->state == 0 || $params->get('show_title') || ($params->get('show_author') && !empty($displayData->author ))) : ?>
 		<?php if ($params->get('show_title')) : ?>
 				<?php if ($params->get('link_titles') && ($params->get('access-view') || $params->get('show_noauth', '0') == '1')) : ?>
-					<a class="news-page__item-title" href="<?php echo JRoute::_(
-						ContentHelperRoute::getArticleRoute($displayData->slug, $displayData->catid, $displayData->language)
-					); ?>" >
+					<h3 class="news-page__item-title"  >
 						<?php echo $this->escape($displayData->title); ?>
-					</a>
+					</h3>
 				<?php else : ?>
 					<?php echo $this->escape($displayData->title); ?>
 				<?php endif; ?>

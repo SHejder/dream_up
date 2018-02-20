@@ -56,11 +56,7 @@ defined('_JEXEC') or die();
                     <?php } ?>
                 </td>
                 <td data-text="Кол-во:">
-                    <div class="cart__count">
-                        <input type="number" name="quantity[<?php print $key_id; ?>]"
-                               value="<?php print $prod['quantity']; ?>">
-                        <?php print $prod['_qty_unit']; ?>
-                    </div>
+                    <strong><?php print $prod['quantity']; ?><?php print $prod['_qty_unit']; ?></strong>
                 </td>
                 <td data-text="Сумма:">
                     <strong>

@@ -27,7 +27,7 @@ $is_home_page = $menu->getActive() == $menu->getDefault($lang->getTag());
     <![endif]-->
 
 </head>
-<body class="homepage">
+<body class="<?php if ($is_home_page) { ?>homepage<?php } else { ?>inner-page<?php } ?>">
 <!-- WRAPPER begin -->
 <div class="layout-wrapper">
     <!-- HEADER begin -->

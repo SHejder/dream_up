@@ -8,6 +8,14 @@
 */
 defined('_JEXEC') or die('Restricted access');
 ?>
+<form action="<?php print $this->action;?>" method="post">
+    <button type="submit">testAB</button>
+    <input type="hidden" name="option" value="com_jshopping">
+    <input type="hidden" name="controller" value="search">
+    <input type="hidden" name="task" value="resultAB">
+</form>
+
+<?php //var_dump(JSFactory::getTable('product', 'jshop'));?>
 <form action="<?php print $this->action;?>" method="post" name="sort_count" id="sort_count" class="form-horizontal">
 <div class="form_sort_count">
 <?php if ($this->config->show_sort_product || $this->config->show_count_select_products) : ?>
@@ -18,12 +26,15 @@ defined('_JEXEC') or die('Restricted access');
                 <?php print _JSHOP_ORDER_BY.": "; ?>
             </div>
             <div class="controls">
-                <?php echo $this->sorting?>
+<!--                --><?php //echo $this->sorting?>
+                <?php var_dump($this->sorting);?>
+
                 <span class="icon-arrow">
                     <img src="<?php print $this->path_image_sorting_dir?>" alt="orderby" onclick="submitListProductFilterSortDirection()" />
                 </span>
             </div>
         </div>
+    <button type="submit">12</button>
     <?php endif; ?>
     <?php if ($this->config->show_count_select_products) : ?>
         <div class="control-group box_products_count_to_page">

@@ -101,7 +101,63 @@ class JshoppingControllerSearch extends JshoppingControllerBase{
         JDispatcher::getInstance()->trigger('onBeforeDisplayProductListView', array(&$view));
         $view->display();
     }
-    
+    function resultAB(){
+        $jshopConfig = JSFactory::getConfig();
+
+		JSFactory::getModel('productShop', 'jshop')->storeEndPages();
+
+		JshopHelpersMetadata::allProducts();
+
+		$modellist = JSFactory::getModel('productssearch', 'jshop');
+		$productlist = JSFactory::getModel('productList', 'jshop');
+        $productlist->setModel($modellist);
+        $productlist->load();
+
+		$orderby = $productlist->getOrderBy();
+        $image_sort_dir = $productlist->getImageSortDir();
+        $action = $productlist->getAction();
+        $products = $modellist->getProductsAB();
+        $pagination = $productlist->getPagination();
+        $pagenav = $productlist->getPagenav();
+		$total = $productlist->getTotal();
+		$filters = $productlist->getFilters();
+        $sorting_sel = $productlist->getHtmlSelectSorting();
+        $product_count_sel = $productlist->getHtmlSelectCount();
+        $allow_review = $productlist->getAllowReview();
+		$search = $filters['search'];
+
+//		if (!$total){
+//            $this->noresult($search);
+//            return 0;
+//        }
+
+        $view = $this->getView("search");
+        $view->setLayout("products");
+        $view->assign('search', $search);
+        $view->assign('total', $total);
+        $view->assign('config', $jshopConfig);
+        $view->assign('template_block_list_product', $productlist->getTmplBlockListProduct());
+        $view->assign('template_block_form_filter', $productlist->getTmplBlockFormFilter());
+        $view->assign('template_block_pagination', $productlist->getTmplBlockPagination());
+        $view->assign('path_image_sorting_dir', $jshopConfig->live_path.'images/'.$image_sort_dir);
+        $view->assign('filter_show', 0);
+        $view->assign('filter_show_category', 0);
+        $view->assign('filter_show_manufacturer', 0);
+        $view->assign('pagination', $pagenav);
+        $view->assign('pagination_obj', $pagination);
+        $view->assign('display_pagination', $pagenav!="");
+        $view->assign('product_count', $product_count_sel);
+        $view->assign('sorting', $sorting_sel);
+        $view->assign('action', $action);
+        $view->assign('orderby', $orderby);
+        $view->assign('count_product_to_row', $productlist->getCountProductsToRow());
+        $view->assign('rows', $products);
+        $view->assign('allow_review', $allow_review);
+        $view->assign('shippinginfo', SEFLink($jshopConfig->shippinginfourl,1));
+        JDispatcher::getInstance()->trigger('onBeforeDisplayProductListView', array(&$view));
+        $view->display();
+    }
+
     function get_html_characteristics(){        
         $category_id = $this->input->getInt("category_id");
         print $this->load_tmpl_characteristics($category_id);

@@ -48,8 +48,27 @@ class jshopProductsSearch implements jshopProductListInterface{
         addLinkToProducts($rows, 0, 1);
 		return $rows;
 	}
-    
-	function getDefaultProductSorting(){
+    function getProductsAB($filters, $order = null, $orderby = null, $limitstart = 0, $limit = 0){
+        $db = JFactory::getDBO();
+        $this->buildAdvQuery($filters, $order, $orderby);
+
+        $query = "SELECT ".$this->adv_result." FROM `#__jshopping_products` AS prod
+                  LEFT JOIN `#__jshopping_products_to_categories` AS pr_cat ON pr_cat.product_id = prod.product_id
+                  LEFT JOIN `#__jshopping_categories` AS cat ON pr_cat.category_id = cat.category_id                  
+                  ".$this->adv_from."
+                  WHERE prod.product_publish=1 AND cat.category_publish=1
+                  ".$this->adv_query."
+                  ORDER BY prod.product_price";
+//        var_dump($query);
+        $db->setQuery($query, $limitstart, $limit);
+        $rows = $db->loadObjectList();
+        $rows = listProductUpdateData($rows);
+        addLinkToProducts($rows, 0, 1);
+        return $rows;
+    }
+
+
+    function getDefaultProductSorting(){
         return JSFactory::getConfig()->product_sorting;
     }
     

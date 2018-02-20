@@ -9,6 +9,8 @@
 defined('_JEXEC') or die('Restricted access');
 ?>
 <div class="catalog">
+
+
     <?php print $this->_tmp_list_products_html_start ?>
     <?php foreach ($this->rows as $k => $product) : ?>
         <!--        --><?php //if ($k % $this->count_product_to_row == 0) : ?>

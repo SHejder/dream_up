@@ -119,11 +119,11 @@ if (!empty($this->item->pagination) && $this->item->pagination && !$this->item->
         <?php endif; ?>
     <?php endif; ?>
 
-    <?php
+<!--    --><?php
 //        if (!empty($this->item->pagination) && $this->item->pagination && $this->item->paginationposition && !$this->item->paginationrelative) :
 //            echo $this->item->pagination;
 //            ?>
-    <!--        --><?php //endif; ?>
+<!--            --><?php //endif; ?>
     <?php if (isset($urls) && ((!empty($urls->urls_position) && ($urls->urls_position == '1')) || ($params->get('urls_position') == '1'))) : ?>
         <?php echo $this->loadTemplate('links'); ?>
     <?php endif; ?>

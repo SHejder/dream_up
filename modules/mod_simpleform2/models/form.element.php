@@ -139,7 +139,7 @@ class simpleForm2Element extends simpleForm2BaseModel{
         if(!isset($attribs['class'])){
             $attribs['class'] = '';
         }
-        $attribs['class'].= ' sf2-element';
+        $attribs['class'].= '';
         return $attribs;
     }
     

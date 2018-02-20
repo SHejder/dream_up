@@ -11,7 +11,7 @@
         <input type="hidden" name="setsearchdata" value="1">
         <input type="hidden" name="category_id" value="<?php print $category_id ?>"/>
         <input type="hidden" name="search_type" value="<?php print $search_type; ?>"/>
-        <input type="text" name="search" value="<?php print $search ?>"/>
+        <input type="text" placeholder="Поиск" name="search" value="<?php print $search ?>"/>
         <input type="submit" value="<?php print _JSHOP_GO ?>"/>
         <?php if ($adv_search) { ?>
             <br/><a href="<?php print $adv_search_link ?>"><?php print _JSHOP_ADVANCED_SEARCH ?></a>

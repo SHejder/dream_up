@@ -311,7 +311,7 @@ class JshoppingControllerUser extends JshoppingControllerBase{
         $view = $this->getView('order');
         $view->setLayout("listorder");
         $view->assign('orders', $orders);
-        $view->assign('image_path', $jshopConfig->live_path."images");
+        $view->assign('image_path', $jshopConfig->live_path."images/");
         $view->assign('total', $total);
         $dispatcher->trigger('onBeforeDisplayOrdersView', array(&$view));
         $view->display();
@@ -354,7 +354,7 @@ class JshoppingControllerUser extends JshoppingControllerBase{
         $view->assign('text_total', $text_total);
         $view->assign('show_percent_tax', $show_percent_tax);
         $view->assign('hide_subtotal', $hide_subtotal);
-        $view->assign('image_path', $jshopConfig->live_path."images");
+        $view->assign('image_path', $jshopConfig->image_product_live_path);
         $view->assign('config_fields', $config_fields);
         $view->assign('count_filed_delivery', $count_filed_delivery);
         $view->assign('allow_cancel', $allow_cancel);

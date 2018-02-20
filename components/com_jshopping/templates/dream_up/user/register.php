@@ -12,7 +12,7 @@ defined('_JEXEC') or die('Restricted access');
 $config_fields = $this->config_fields;
 include(dirname(__FILE__)."/register.js.php");
 ?>
-<div class="<?php if ($this->config->shop_user_guest) : ?>ordering__item-content<?php endif; ?> form">
+<div class="<?php if ($this->config->shop_user_guest && $this->show_pay_without_reg) : ?>ordering__item-content<?php endif; ?> form">
     <?php if (!isset($hideheaderh1)) : ?>
         <h1><?php print _JSHOP_REGISTRATION;?></h1>
     <?php endif; ?>

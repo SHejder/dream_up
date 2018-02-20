@@ -220,7 +220,7 @@ function MediaEventListener(queryOption){
                 methods.addExtraBar(menuRoot, menuItems);
 
                 containerWidth = menuRoot.width();
-                methods.hideItem(menuRoot, menuItems, containerWidth)
+                methods.hideItem(menuRoot, menuItems, containerWidth);
 
                 window.addEventListener("resize", function() {
                     containerWidth = menuRoot.width();
@@ -1058,11 +1058,15 @@ jQuery('.ordering__item').on('click', '.ordering__item-title', function () {
 
 });
 
+jQuery('.js-callback').on('click', function () {
+    jQuery('.overlay').addClass('is-active'); 
+});
+
 jQuery('body').on('click', '.overlay__close', function () {
-    jQuery('.overlay').remove();
+    jQuery('.overlay').removeClass('is-active');
 });
 jQuery('body').on('click', '.overlay__bg', function () {
-    jQuery('.overlay').remove();
+    jQuery('.overlay').removeClass('is-active');
 });
 
 

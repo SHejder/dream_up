@@ -8,8 +8,7 @@
 */
 defined('_JEXEC') or die('Restricted access');
 ?>
-<div id="comjshop">
-    <?php print $this->checkout_navigator?>
+<!--    --><?php //print $this->checkout_navigator?>
     <?php print $this->small_cart?>
     
     <div class="jshop checkout_pfinish_block">
@@ -102,4 +101,3 @@ defined('_JEXEC') or die('Restricted access');
         </form>
         
     </div>
-</div>

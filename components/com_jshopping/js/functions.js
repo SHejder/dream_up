@@ -1235,12 +1235,17 @@ function disableElement(idElement){
 }
 
 function submitListProductFilterSortDirection(){
-    $_('orderby').value = $_('orderby').value ^ 1;
+    // $_('orderby').value = $_('orderby').value ^ 1;
     submitListProductFilters();
 }
 
-function submitListProductFilters(){
-    $_('sort_count').submit();
+function submitListProductFilters(el){
+        // jQuery('a.sort').click(function (e) {
+        //     e.preventDefault();
+            console.log(jQuery(el).parent());
+            jQuery(el).parent().submit();
+        // });
+
 }
 
 function clearProductListFilter(){

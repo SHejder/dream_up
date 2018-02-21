@@ -1,5 +1,5 @@
 // Constants
-var AJAX_LOADER  = '<img src="templates/new_dream_up/images/loader.svg" width="20" height="20">';
+var AJAX_LOADER  = '<img src="/templates/new_dream_up/images/loader.svg" width="20" height="20">';
 var NOTY_TIMEOUT = 1000;
 
 // Functions

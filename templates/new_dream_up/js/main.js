@@ -1069,6 +1069,13 @@ jQuery('body').on('click', '.overlay__bg', function () {
     jQuery('.overlay').removeClass('is-active');
 });
 
+jQuery('body').on('click', '.-quick-veiw .overlay__close', function () {
+    jQuery('.overlay').remove();
+});
+jQuery('body').on('click', '.-quick-veiw .overlay__bg', function () {
+    jQuery('.overlay').remove();
+});
+
 
 // init Masonry
 var masonry = jQuery('.news-page').masonry({

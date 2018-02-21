@@ -13,6 +13,7 @@ $doc->addStyleSheet($template_url . '/css/main.css');
 
 $is_home_page = $menu->getActive() == $menu->getDefault($lang->getTag());
 
+
 ?>
 
 <!doctype html>
@@ -54,31 +55,31 @@ $is_home_page = $menu->getActive() == $menu->getDefault($lang->getTag());
                         <jdoc:include type="modules" name="klienti"/>
                     <?php } ?>
                     <div class="header-top__social">
-                        <a class="header-top__social-item" href="" target="_blank" rel="noreferrer noopener">
+                        <a class="header-top__social-item" href="https://www.instagram.com/dream_up_rukodelie/" target="_blank" rel="noreferrer noopener">
                             <img src="<?php echo $template_url . '/images/social-item__inst.png' ?>" alt="Instagram"
                                  title="Instagram">
                         </a>
-                        <a class="header-top__social-item" href="" target="_blank" rel="noreferrer noopener">
+                        <a class="header-top__social-item" href="https://vk.com/club13710874" target="_blank" rel="noreferrer noopener">
                             <img src="<?php echo $template_url . '/images/social-item__vk.png' ?>" alt="VKontakte"
                                  title="VKontakte">
                         </a>
-                        <a class="header-top__social-item" href="" target="_blank" rel="noreferrer noopener">
+                        <a class="header-top__social-item" href="https://www.facebook.com/%D0%9B%D0%B0%D0%B2%D0%BA%D0%B0-%D1%80%D1%83%D0%BA%D0%BE%D0%B4%D0%B5%D0%BB%D0%B8%D1%8F-Dream-Up-1057985020935693/" target="_blank" rel="noreferrer noopener">
                             <img src="<?php echo $template_url . '/images/social-item__fb.png' ?>" alt="FaceBook"
                                  title="FaceBook">
                         </a>
-                        <a class="header-top__social-item" href="" target="_blank" rel="noreferrer noopener">
+                        <a class="header-top__social-item" href="https://www.youtube.com/user/kyanlu1988/" target="_blank" rel="noreferrer noopener">
                             <img src="<?php echo $template_url . '/images/social-item__yt.png' ?>" alt="YouTube"
                                  title="YouTube">
                         </a>
-                        <a class="header-top__social-item" href="" target="_blank" rel="noreferrer noopener">
+                        <a class="header-top__social-item" href="https://ok.ru/profile/575127092127" target="_blank" rel="noreferrer noopener">
                             <img src="<?php echo $template_url . '/images/social-item__ok.png' ?>" alt="Одноклассники"
                                  title="Одноклассники">
                         </a>
-                        <a class="header-top__social-item" href="" target="_blank" rel="noreferrer noopener">
+                        <a class="header-top__social-item" href="whatsapp://send?phone=+79101855497&abid=+79101855497" target="_blank" rel="noreferrer noopener">
                             <img src="<?php echo $template_url . '/images/social-item__whatsapp.png' ?>" alt="Whats App"
                                  title="Whats App">
                         </a>
-                        <a class="header-top__social-item" href="" target="_blank" rel="noreferrer noopener">
+                        <a class="header-top__social-item" href="viber://chat?number=+79101855497" target="_blank" rel="noreferrer noopener">
                             <img src="<?php echo $template_url . '/images/social-item__viber.png' ?>" alt="Viber"
                                  title="Viber">
                         </a>
@@ -149,14 +150,49 @@ $is_home_page = $menu->getActive() == $menu->getDefault($lang->getTag());
                         <ul>
                             <li><a href="/vkhod-v-lichnyj-kabinet/myaccount">Профиль</a></li>
                             <li><a href="/vkhod-v-lichnyj-kabinet/orders">Мои заказы</a></li>
-                            <li><a href="/" >Выход </a></li>
+                            <li><a href="/vkhod-v-lichnyj-kabinet/logout" >Выход </a></li>
                         </ul>
                     </nav>
                 <?php } else {?>
 
                 <div class="header-mobile__form form">
                     <p class="header-mobile__form-title">Авторизация</p>
-                    <jdoc:include type="modules" name="klienti"/>
+                    <form method="post"
+                          action="<?php print SEFLink('index.php?option=com_jshopping&controller=user&task=loginsave', 1, 0, $this->config->use_ssl) ?>"
+                          name="jlogin" class="form-horizontal">
+                        <div class="form__item -name has-content">
+                            <label><?php print _JSHOP_USERNAME ?></label>
+                            <input type="text" name="username" placeholder="Логин">
+                            <div class="form__item-error"></div>
+                        </div>
+                        <div class="form__item -email-password">
+                            <label><?php print _JSHOP_PASSWORT ?></label>
+                            <input type="password" name="passwd" placeholder="Пароль">
+                            <!--                    <div class="error">-->
+                            <!--                        <ul>-->
+                            <!--                            <li>Неверный пароль</li>-->
+                            <!--                        </ul>-->
+                            <!--                    </div>-->
+                        </div>
+                        <div class="custom-checkbox">
+                            <label class="required">
+                                <input type="checkbox" name="remember" value="1" required="" checked="">
+                                <span><?php print _JSHOP_REMEMBER_ME ?></span>
+                            </label>
+                        </div>
+                        <button class="homepage-bottom__form-btn btn" type="submit">Отправить</button>
+                        <a href="<?php print $this->href_lost_pass ?>"><?php print _JSHOP_LOST_PASSWORD ?></a>
+                        <input type="hidden" name="return" value="<?php print $this->return ?>"/>
+                        <?php echo JHtml::_('form.token'); ?>
+                        <?php echo $this->tmpl_login_html_3 ?>
+                    </form>
+                    <?php if (!$this->config->show_registerform_in_logintemplate) { ?>
+                        <span class="small_header"><?php print _JSHOP_HAVE_NOT_ACCOUNT ?>?</span>
+                        <div class="logintext">
+                            <a href="<?php print $this->href_register ?>">Зарегистрируйтесь</a> пожалуйста!
+                        </div>
+                    <?php } ?>
+
                 </div>
                 <?php } ?>
                 <!-- homepage-bottom__form end -->
@@ -316,31 +352,31 @@ $is_home_page = $menu->getActive() == $menu->getDefault($lang->getTag());
                     <p class="footer__copywrite">© 2013 — <?php echo date('Y') ?> г. Dream Up, все права защищены.</p>
                 </div>
                 <div class="footer__social">
-                    <a class="footer__social-item" href="" target="_blank" rel="noreferrer noopener">
+                    <a class="footer__social-item" href="https://www.instagram.com/dream_up_rukodelie/" target="_blank" rel="noreferrer noopener">
                         <img src="<?php echo $template_url . '/images/social-item-footer__inst.png' ?>" alt="Instagram"
                              title="Instagram">
                     </a>
-                    <a class="footer__social-item" href="" target="_blank" rel="noreferrer noopener">
+                    <a class="footer__social-item" href="https://vk.com/club13710874" target="_blank" rel="noreferrer noopener">
                         <img src="<?php echo $template_url . '/images/social-item-footer__vk.png' ?>" alt="VKontakte"
                              title="VKontakte">
                     </a>
-                    <a class="footer__social-item" href="" target="_blank" rel="noreferrer noopener">
+                    <a class="footer__social-item" href="https://www.facebook.com/%D0%9B%D0%B0%D0%B2%D0%BA%D0%B0-%D1%80%D1%83%D0%BA%D0%BE%D0%B4%D0%B5%D0%BB%D0%B8%D1%8F-Dream-Up-1057985020935693/" target="_blank" rel="noreferrer noopener">
                         <img src="<?php echo $template_url . '/images/social-item-footer__fb.png' ?>" alt="FaceBook"
                              title="FaceBook">
                     </a>
-                    <a class="footer__social-item" href="" target="_blank" rel="noreferrer noopener">
+                    <a class="footer__social-item" href="https://www.youtube.com/user/kyanlu1988/" target="_blank" rel="noreferrer noopener">
                         <img src="<?php echo $template_url . '/images/social-item-footer__yt.png' ?>" alt="YouTube"
                              title="YouTube">
                     </a>
-                    <a class="footer__social-item" href="" target="_blank" rel="noreferrer noopener">
-                        <img src="<?php echo $template_url . '/images/social-item-footer__ok.png' ?>"
-                             alt="Одноклассники" title="Одноклассники">
+                    <a class="footer__social-item" href="https://ok.ru/profile/575127092127" target="_blank" rel="noreferrer noopener">
+                        <img src="<?php echo $template_url . '/images/social-item-footer__ok.png' ?>" alt="Одноклассники"
+                             title="Одноклассники">
                     </a>
-                    <a class="footer__social-item" href="" target="_blank" rel="noreferrer noopener">
-                        <img src="<?php echo $template_url . '/images/social-item-footer__whatsapp.png' ?>"
-                             alt="Whats App" title="Whats App">
+                    <a class="footer__social-item" href="whatsapp://send?phone=+79101855497&abid=+79101855497" target="_blank" rel="noreferrer noopener">
+                        <img src="<?php echo $template_url . '/images/social-item-footer__whatsapp.png' ?>" alt="Whats App"
+                             title="Whats App">
                     </a>
-                    <a class="footer__social-item" href="" target="_blank" rel="noreferrer noopener">
+                    <a class="footer__social-item" href="viber://chat?number=+79101855497" target="_blank" rel="noreferrer noopener">
                         <img src="<?php echo $template_url . '/images/social-item-footer__viber.png' ?>" alt="Viber"
                              title="Viber">
                     </a>

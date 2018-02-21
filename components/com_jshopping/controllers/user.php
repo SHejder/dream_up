@@ -187,7 +187,7 @@ class JshoppingControllerUser extends JshoppingControllerBase{
         $dispatcher->trigger('onAfterRegister', array(&$user, &$usershop, &$post, &$useractivation));
 
         $message = $model->getMessageUserRegistration($useractivation);
-        $return = SEFLink("index.php?option=com_jshopping&controller=user&task=login",1,1,$jshopConfig->use_ssl);
+        $return = SEFLink("index.php?option=com_content&view=article&id=343",1,1,$jshopConfig->use_ssl);
 
         $this->setRedirect($return, $message);
     }

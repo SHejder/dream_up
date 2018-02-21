@@ -99,6 +99,8 @@ include(dirname(__FILE__) . "/load.js.php");
 
             </form>
 
+        <?php } else {?>
+        <strong>Нет в наличии</strong>
         <?php } ?>
         <?php print $this->_tmp_product_html_after_buttons; ?>
 

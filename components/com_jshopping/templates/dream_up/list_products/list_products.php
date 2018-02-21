@@ -12,7 +12,10 @@ defined('_JEXEC') or die('Restricted access');
 
 
     <?php print $this->_tmp_list_products_html_start ?>
+<!--    --><?php //var_dump($this->rows);?>
+
     <?php foreach ($this->rows as $k => $product) : ?>
+
         <!--        --><?php //if ($k % $this->count_product_to_row == 0) : ?>
         <!--        --><?php //endif; ?>
 

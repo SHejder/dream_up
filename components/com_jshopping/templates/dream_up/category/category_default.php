@@ -7,6 +7,7 @@
  * @license      GNU/GPL
  */
 defined('_JEXEC') or die('Restricted access');
+$template_url = $this->baseurl . '/templates/new_dream_up/' ;
 
 print $this->_tmp_category_html_start;
 ?>
@@ -15,8 +16,8 @@ print $this->_tmp_category_html_start;
     <div class="catalog-categories">
     <?php foreach($this->categories as $k=>$category) : ?>
         <div class="catalog-categories__item">
-                <a href = "<?php print $category->category_link;?>">
-                    <img src="<?php print $this->image_category_path;?>/<?php if ($category->category_image) print $category->category_image; else print $this->noimage;?>" alt="<?php print htmlspecialchars($category->name)?>" title="<?php print htmlspecialchars($category->name)?>" />
+                <a class="catalog-categories__item-img" href = "<?php print $category->category_link;?>">
+                    <img src="<?php if ($category->category_image){ ?><? print $this->image_category_path;?>/<?php print $category->category_image;?><?php } else { ?><?php echo $template_url . '/images/catalog-categories-default.png' ?><?php } ?> " alt="<?php print htmlspecialchars($category->name)?>" title="<?php print htmlspecialchars($category->name)?>" />
                 </a>
             <a class="catalog-categories__item-name" href = "<?php print $category->category_link?>">
                 <?php print $category->name?>

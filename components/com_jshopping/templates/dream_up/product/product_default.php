@@ -9,11 +9,24 @@
 defined('_JEXEC') or die('Restricted access');
 $product = $this->product;
 include(dirname(__FILE__) . "/load.js.php");
+require_once(dirname(__FILE__) . '/../../../models/cart.php');
+
+
+$session = JFactory::getSession();
+$objcart = $session->get('cart');
+$in_cart = unserialize($objcart);
+$in = jshopCart::reCreate($in_cart);
+
+
 ?>
-    <h1><?php print $this->product->name ?></h1>
+<h1><?php print $this->product->name ?></h1>
 
 <?php print $this->_tmp_product_html_start; ?>
 <?php include(dirname(__FILE__) . "/ratingandhits.php"); ?>
+<?php
+$messages = JFactory::getApplication()->getMessageQueue();
+?>
+
 
 <div class="product-cart">
     <div class="product-cart__images">
@@ -70,6 +83,13 @@ include(dirname(__FILE__) . "/load.js.php");
 
     <div class="product-cart__text">
         <div class="product-cart__price">
+            <?php if ($this->product->product_old_price > 0) { ?>
+                <span class="product-cart__price-old">
+                    <?php print formatprice($this->product->product_old_price) ?>
+                    <?php print $this->product->_tmp_var_old_price_ext; ?>
+                </span>
+            <?php } ?>
+
             <?php if ($this->product->_display_price) { ?>
                 <?php print formatprice($this->product->getPriceCalculate()) ?>
                 <?php print $this->product->_tmp_var_price_ext; ?>
@@ -77,7 +97,9 @@ include(dirname(__FILE__) . "/load.js.php");
         </div>
         <?php print $this->product->_tmp_var_bottom_allprices; ?>
         <?php print $this->_tmp_product_html_before_buttons; ?>
+
         <?php if (!$this->hide_buy) { ?>
+
             <form name="product" method="post" action="<?php print $this->action ?>"
                   enctype="multipart/form-data"
                   autocomplete="off">
@@ -99,8 +121,31 @@ include(dirname(__FILE__) . "/load.js.php");
 
             </form>
 
-        <?php } else {?>
-        <strong>Нет в наличии</strong>
+            <?php foreach ($in->products as $a => $prod_in_cart) :
+                $prod_in_cart_id = $prod_in_cart['product_id'];
+                settype($prod_in_cart_id, 'string');
+//    var_dump($prod_in_cart_id);
+//    var_dump($product->product_id);
+                ?>
+
+                <?php if ($prod_in_cart_id == $product->product_id) {
+                echo '<strong class="warnings">' . 'Товар в корзине, хотите добавить еще?' . '</strong>';
+            }
+                ?>
+            <?php endforeach; ?>
+            <?php
+            if (is_array($messages)) {
+                echo '<div class="warnings">';
+                foreach ($messages as $message)
+                    echo '<div class="' . $message['type'] . '">' . $message['message'] . '</div>';
+                echo '</div>';
+
+            };
+            ?>
+
+
+        <?php } else { ?>
+            <strong>Нет в наличии</strong>
         <?php } ?>
         <?php print $this->_tmp_product_html_after_buttons; ?>
 
@@ -110,6 +155,7 @@ include(dirname(__FILE__) . "/load.js.php");
 
     <?php print $this->_tmp_product_html_end; ?>
 </div>
+
 
 
 

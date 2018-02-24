@@ -95,6 +95,26 @@ class jshopCart{
         JDispatcher::getInstance()->trigger('onAfterLoadPriceAndCountProducts', array(&$this));
     }
 
+    static function reCreate($obj) {
+        $obj = (array) $obj;
+        $newObj = new jshopCart();
+        foreach($obj as $k => $v) {
+            $parts = explode(chr(0), $k);
+            if ($k != '__PHP_Incomplete_Class_Name') {
+                if ($parts[0] == $k)
+                    $newObj->reCreatePrivate($k, $v);
+                else
+                    $newObj->reCreatePrivate($parts[2], $v);
+            }
+        }
+        return $newObj;
+    }
+
+
+    function reCreatePrivate($name, $value) {
+        $this->$name = $value;
+    }
+
     function getPriceProducts(){
         return $this->price_product;
     }

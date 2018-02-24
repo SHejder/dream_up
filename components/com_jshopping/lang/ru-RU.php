@@ -386,7 +386,7 @@ define('_JSHOP_AND', 'и');
 define('_JSHOP_CONFIRM', 'подтвердить');
 define('_JSHOP_ERROR_MAX_COUNT_ORDER_ONE_PRODUCT', 'Maксимальное количество единиц товара в заказе - %s');
 define('_JSHOP_ERROR_MIN_COUNT_ORDER_ONE_PRODUCT', 'Минимальное количество единиц товара для возможности заказа - %s');
-define('_JSHOP_ERROR_MIN_SUM_ORDER', 'Минимальная сумма заказа - %s');
+define('_JSHOP_ERROR_MIN_SUM_ORDER', 'Недостаточная сумма для отправки заказа. Минимальная сумма заказа - %s');
 define('_JSHOP_ERROR_MAX_SUM_ORDER', 'Максимальная сумма заказа - %s');
 
 define('_JSHOP_SELECT','Выберите');

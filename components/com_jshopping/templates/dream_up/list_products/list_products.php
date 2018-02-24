@@ -7,12 +7,24 @@
  * @license      GNU/GPL
  */
 defined('_JEXEC') or die('Restricted access');
+require_once (dirname(__FILE__).'/../../../models/cart.php');
+
+$session = JFactory::getSession();
+//$objcart = $session->get('cart');
+//$in_cart = unserialize($objcart);
+//$in = jshopCart::reCreate($in_cart);
+//foreach ($in->products as $a=>$prod_in_cart) {
+//    var_dump($prod_in_cart['product_id']);}
+var_dump($session);
 ?>
+
+
 <div class="catalog">
 
-
     <?php print $this->_tmp_list_products_html_start ?>
-<!--    --><?php //var_dump($this->rows);?>
+<!--    <p style="width: 600px">    --><?php //var_dump($in->products);?>
+<!--    </p>-->
+
 
     <?php foreach ($this->rows as $k => $product) : ?>
 

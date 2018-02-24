@@ -9,7 +9,6 @@ $session = JFactory::getSession();
 <?php
 $messages = JFactory::getApplication()->getMessageQueue();
 if (is_array($messages)) {
-    var_dump($messages);
     echo '<div class="warnings">';
     foreach ($messages as $message)
         if ($message['type'] != "message") {
@@ -164,7 +163,7 @@ if (is_array($messages)) {
     $min_order_summ = implode(' ', $matches[0]);
     if (!is_numeric($min_order_summ)) $min_order_summ = 0;
     ?>
-    <div class="cart__info-item -min-cost<?php if ($this->summ < $min_order_summ) echo ' min_order_summ'; ?>"><?php print $this->cartdescr; ?></div>
+    <div class="cart__info-item -min-cost<?php if ($this->summ < $min_order_summ) echo ' warnings'; ?>"><?php print $this->cartdescr; ?></div>
     <?php } else { ?>
         <div class="cart_empty_text"><?php print _JSHOP_CART_EMPTY; ?></div>
         <?php $session->set('show_pay_without_reg', 0); ?>
@@ -175,11 +174,25 @@ if (is_array($messages)) {
     <?php } ?>
 </div>
 <?php if ($countprod > 0) { ?>
+    <script>
 
+
+    </script>
     <a id="checkout" class="cart__btn btn"
        href="<?php print $this->href_checkout; ?>"><?php print _JSHOP_CHECKOUT; ?></a>
 <?php } ?>
+<script>
+    jQuery(document).ready(function () {
+        if (jQuery('div.cart__info-item').hasClass('warnings')){
+            jQuery('#checkout').removeAttr("href");
+            jQuery('#checkout').addClass('disabled');
 
+        }
+
+            })
+
+
+</script>
 
 <?php print $this->_tmp_ext_html_before_discount; ?>
 <?php if ($this->use_rabatt && $countprod > 0) { ?>

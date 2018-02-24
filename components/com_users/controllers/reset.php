@@ -182,7 +182,7 @@ class UsersControllerReset extends UsersController
 			// Complete succeeded.
 			// Proceed to the login form.
 			$message = JText::_('COM_USERS_RESET_COMPLETE_SUCCESS');
-			$this->setRedirect(JRoute::_('index.php?option=com_users&view=login', false), $message);
+			$this->setRedirect(JRoute::_('/vkhod-v-lichnyj-kabinet/login', false), $message);
 
 			return true;
 		}

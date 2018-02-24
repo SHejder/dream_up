@@ -13,6 +13,17 @@ JHtml::_('behavior.keepalive');
 JHtml::_('behavior.formvalidator');
 
 ?>
+<?php
+$messages = JFactory::getApplication()->getMessageQueue();
+if (is_array($messages)) {
+    echo '<div class="warnings">';
+    foreach ($messages as $message)
+        echo '<div class="' . $message['type'] . '">' . $message['message'] . '</div>';
+    echo '</div>';
+
+};
+?>
+
 <div class="reset-complete<?php echo $this->pageclass_sfx; ?>">
 	<?php if ($this->params->get('show_page_heading')) : ?>
 		<div class="page-header">

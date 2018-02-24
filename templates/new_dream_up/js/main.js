@@ -855,12 +855,17 @@ mediaEventListener.addQueryAction('resize', function(){
 //
 
 window.addEventListener('scroll', function() {
-
-    if( app.helper.scroll.direction() === 'down'){
-        jQuery('.header-mobile').addClass('-small');
+	var scroll = document.documentElement.scrollTop || window.pageYOffset || window.scrollY;
+	//console.log(scroll, app.helper.scroll.direction());
+	if( scroll > 20) {
+		if( app.helper.scroll.direction() === 'down'){
+			jQuery('.header-mobile').addClass('-small');
+		} else {
+			jQuery('.header-mobile').removeClass('-small');
+		}
     } else {
-        jQuery('.header-mobile').removeClass('-small');
-    }
+		jQuery('.header-mobile').removeClass('-small');
+	}
 });
 
 (function () {

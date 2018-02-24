@@ -1,7 +1,18 @@
 <!--<div class="latest_products jshop jshop_list_product">-->
+
+<?php
+$jshopConfig = JSFactory::getConfig();
+$hide_buy = 0;
+
+?>
 <div class="product-carousel__carousel owl-carousel">
 
-    <?php  foreach ($rows  as $product) { ?>
+    <?php foreach ($rows as $product) { ?>
+        <?php
+        if ($jshopConfig->user_as_catalog) $hide_buy = 1;
+        if ($jshopConfig->hide_buy_not_avaible_stock && $product->product_quantity <= 0) $hide_buy = 1;
+        if (!$product->_display_price) $hide_buy = 1;
+        ?>
         <div class="product-carousel__item product">
             <?php if ($show_image && $product->image){// option modul  show_image ?>
             <div class="product__img">
@@ -33,21 +44,31 @@
                     <?php } ?>
 
                     <?php print $product->_tmp_var_bottom_price; ?>
+                    <?php if (!$hide_buy) { ?>
 
-                    <div class="product__count">
-                        <input type="number" name="quantity" id="quantity" onkeyup="reloadPrices();" class="inputbox"
-                               value="1"/><?php print $product->_tmp_qty_unit; ?>
-                    </div>
-
+                        <div class="product__count">
+                            <input type="number" name="quantity" id="quantity" onkeyup="reloadPrices();"
+                                   class="inputbox"
+                                   value="1"/><?php print $product->_tmp_qty_unit; ?>
+                        </div>
+                    <?php } ?>
 
                 </div>
-                <input type="submit" class="product__buy" value="<?php print _JSHOP_ADD_TO_CART ?>"
-                       onclick="jQuery('#to').val('cart');"/>
+                <?php if (!$hide_buy) { ?>
+
+                    <input type="submit" class="product__buy" value="<?php print _JSHOP_ADD_TO_CART ?>"
+                           onclick="jQuery('#to').val('cart');"/>
+                <?php } ?>
+
                 <input type="hidden" name="to" id='to' value="cart"/>
                 <input type="hidden" name="product_id" id="product_id" value="<?php print $product->product_id ?>"/>
                 <input type="hidden" name="category_id" id="category_id" value="<?php print $product->category_id; ?>"/>
                 <?php print $product->_tmp_var_bottom_buttons; ?>
             </form>
+            <?php if ($hide_buy) { ?>
+                <strong>Нет в наличии</strong>
+            <?php } ?>
+
 
         </div>
 

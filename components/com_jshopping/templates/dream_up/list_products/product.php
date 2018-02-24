@@ -31,6 +31,7 @@ $objcart = $session->get('cart');
 $in_cart = unserialize($objcart);
 $in = jshopCart::reCreate($in_cart);
 
+//var_dump(getFilters());
 
 ?>
 

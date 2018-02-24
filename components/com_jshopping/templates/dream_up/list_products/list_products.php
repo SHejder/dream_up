@@ -15,7 +15,7 @@ $session = JFactory::getSession();
 //$in = jshopCart::reCreate($in_cart);
 //foreach ($in->products as $a=>$prod_in_cart) {
 //    var_dump($prod_in_cart['product_id']);}
-var_dump($session);
+//var_dump($this->getWillBeUseFilter());
 ?>
 
 

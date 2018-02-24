@@ -6,6 +6,20 @@ $session = JFactory::getSession();
 ?>
 <h1>Корзина</h1>
 
+<?php
+$messages = JFactory::getApplication()->getMessageQueue();
+if (is_array($messages)) {
+    var_dump($messages);
+    echo '<div class="warnings">';
+    foreach ($messages as $message)
+        if ($message['type'] != "message") {
+            echo '<div class="' . $message['type'] . '">' . $message['message'] . '</div>';
+        }
+    echo '</div>';
+
+};
+?>
+
 
 <div class="cart">
     <form action="<?php print SEFLink('index.php?option=com_jshopping&controller=cart&task=refresh'); ?>"
@@ -154,7 +168,7 @@ $session = JFactory::getSession();
     <?php } else { ?>
         <div class="cart_empty_text"><?php print _JSHOP_CART_EMPTY; ?></div>
         <?php $session->set('show_pay_without_reg', 0); ?>
-        <?php $session->set('cart',null); ?>
+        <?php $session->set('cart', null); ?>
     <?php } ?>
     <?php if ($this->config->summ_null_shipping > 0 && $min_order_summ != 0) { ?>
         <div class="cart__info-item -free-deliver"><?php printf(_JSHOP_FROM_PRICE_SHIPPING_FREE, formatprice($this->config->summ_null_shipping, null, 1)); ?></div>

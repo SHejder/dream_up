@@ -9,12 +9,16 @@
 defined('_JEXEC') or die('Restricted access');
 ?>
 <script type="text/javascript">
-var register_field_require = {};
-<?php
-foreach($config_fields as $key=>$val){
-    if ($val['require']){
-        print "register_field_require['".$key."']=1;";
+    var register_field_require = {};
+        console.log(jQuery('.form').is(':hidden'));
+    if (jQuery('.ordering__item-content').is(':visible')) {
+    <?php
+    foreach($config_fields as $key=>$val){
+        if ($val['require']){
+            print "register_field_require['".$key."']=1;";
+        }
     }
+    ?>
 }
-?>
+
 </script>

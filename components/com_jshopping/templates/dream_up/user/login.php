@@ -15,6 +15,16 @@ defined('_JEXEC') or die('Restricted access');
 
 
 <div class="ordering">
+    <?php
+    $messages = JFactory::getApplication()->getMessageQueue();
+    if (is_array($messages))
+    {
+        echo '<div class="warnings">';
+        foreach($messages as $message) echo '<div class="'.$message['type'].'">'.$message['message'].'</div>';
+        echo '</div>';
+    };
+    ?>
+
 
     <?php if ($this->config->shop_user_guest && $this->show_pay_without_reg) : ?>
         <p>Выберите удобный Вам способ оформления заказа:</p>
@@ -30,6 +40,7 @@ defined('_JEXEC') or die('Restricted access');
         <button class="ordering__item-title"><span>У меня уже есть учетная запись</span></button>
         <div class="ordering__item-content form">
             <?php endif; ?>
+
             <form method="post"
                   action="<?php print SEFLink('index.php?option=com_jshopping&controller=user&task=loginsave', 1, 0, $this->config->use_ssl) ?>"
                   name="jlogin" class="form-horizontal">
@@ -49,7 +60,7 @@ defined('_JEXEC') or die('Restricted access');
                 </div>
                 <div class="custom-checkbox">
                     <label class="required">
-                        <input type="checkbox" name="remember" value="1" required="" checked="">
+                        <input type="checkbox" name="remember" value="1"  checked="">
                         <span><?php print _JSHOP_REMEMBER_ME ?></span>
                     </label>
                 </div>
@@ -83,14 +94,14 @@ defined('_JEXEC') or die('Restricted access');
                         <?php if ($config_fields['l_name']['display']){?>
                             <div class="form__item -name has-content">
                                 <label>Фамилия</label>
-                                <input type = "text" name = "l_name" id = "l_name" value = "<?php print $this->user->l_name ?>" />
+                                <input type = "text" name = "l_name" placeholder="Фамилия" id = "l_name" value = "<?php print $this->user->l_name ?>" />
                                 <div class="form__item-error"></div>
                             </div>
                         <?php } ?>
                         <?php if ($config_fields['f_name']['display']){?>
                             <div class="form__item -name has-content">
                                 <label>Имя</label>
-                                <input type = "text" name = "f_name" id = "f_name" value = "<?php print $this->user->f_name ?>" />
+                                <input type = "text" name = "f_name" id = "f_name" placeholder="Имя" value = "<?php print $this->user->f_name ?>" />
                                 <div class="form__item-error"></div>
                             </div>
                         <?php } ?>
@@ -98,14 +109,14 @@ defined('_JEXEC') or die('Restricted access');
 
                             <div class="form__item -name has-content">
                                 <label>Отчество</label>
-                                <input type = "text" name = "m_name" id = "m_name" value = "<?php print $this->user->m_name ?>" />
+                                <input type = "text" name = "m_name" id = "m_name" placeholder="Отчество" value = "<?php print $this->user->m_name ?>" />
                                 <div class="form__item-error"></div>
                             </div>
                         <?php } ?>
                         <?php if ($config_fields['email']['display']){?>
                             <div class="form__item -name has-content">
                                 <label>Email</label>
-                                <input type = "text" name = "email" id = "email" value = "<?php print $this->user->email ?>"  />
+                                <input type = "text" name = "email" placeholder="E-mail" id = "email" value = "<?php print $this->user->email ?>"  />
                                 <div class="form__item-error"></div>
                             </div>
                         <?php } ?>
@@ -115,7 +126,7 @@ defined('_JEXEC') or die('Restricted access');
 
                             <div class="form__item -name has-content">
                                 <label>Мобильный телефон</label>
-                                <input type = "text" name = "mobil_phone" id = "mobil_phone" value = "<?php print $this->user->mobil_phone ?>" />
+                                <input type = "text" name = "mobil_phone" placeholder="Телефон" id = "mobil_phone" value = "<?php print $this->user->mobil_phone ?>" />
                                 <div class="form__item-error"></div>
                             </div>
                         <?php } ?>

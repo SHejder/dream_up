@@ -7,13 +7,21 @@
 * @license      GNU/GPL
 */
 defined('_JEXEC') or die('Restricted access');
-include(dirname(__FILE__)."/register.js.php");
+//include(dirname(__FILE__)."/register.js.php");
 
 ?>
 <?php
 $config_fields = $this->config_fields;
-include(dirname(__FILE__)."/register.js.php");
+//include(dirname(__FILE__)."/register.js.php");
+$messages = JFactory::getApplication()->getMessageQueue();
+if (is_array($messages))
+{
+    echo '<div class="warnings">';
+    foreach($messages as $message) echo '<div class="'.$message['type'].'">'.$message['message'].'</div>';
+    echo '</div>';
+};
 ?>
+
 
 
 <div class="<?php if ($this->config->shop_user_guest && $this->show_pay_without_reg) : ?>ordering__item-content<?php endif; ?> form">

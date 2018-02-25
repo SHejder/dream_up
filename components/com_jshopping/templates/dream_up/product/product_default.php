@@ -16,8 +16,10 @@ $session = JFactory::getSession();
 $objcart = $session->get('cart');
 $in_cart = unserialize($objcart);
 $in = jshopCart::reCreate($in_cart);
-
-
+$cart_prod = [];
+for ($i = 0; $i < count($in->products); $i++) {
+    $cart_prod[$i] = $in->products[$i]['product_id'];
+}
 ?>
 <h1><?php print $this->product->name ?></h1>
 
@@ -97,19 +99,45 @@ $messages = JFactory::getApplication()->getMessageQueue();
         </div>
         <?php print $this->product->_tmp_var_bottom_allprices; ?>
         <?php print $this->_tmp_product_html_before_buttons; ?>
-
         <?php if (!$this->hide_buy) { ?>
 
             <form name="product" method="post" action="<?php print $this->action ?>"
                   enctype="multipart/form-data"
                   autocomplete="off">
+
+                <!--        АТРИБУТЫ ТОВАРА-->
+                <?php if (count($this->attributes)) { ?>
+                    <?php foreach ($this->attributes as $attribut) { ?>
+                        <span class="attributes_name"><?php print $attribut->attr_name ?>:</span><span
+                                class="attributes_description"><?php print $attribut->attr_description; ?></span>
+                        <span id='block_attr_sel_<?php print $attribut->attr_id ?>'>
+                <?php print $attribut->selects ?>
+                </span>
+                    <?php } ?>
+                <?php } ?>
+
+                <!--        КОНЕЦ АТРИБУТОВ-->
+
+
                 <div class="product-cart__form">
                     <div class="product-cart__count">
                         <input type="number" name="quantity" id="quantity" onkeyup="reloadPrices();"
                                value="<?php print $this->default_count_product ?>"/><?php print $this->_tmp_qty_unit; ?>
                     </div>
-                    <button type="submit" onclick="jQuery('#to').val('cart');"
-                            class="product-cart__buy btn"><?php print _JSHOP_ADD_TO_CART ?></button>
+                    <?php if (!$hide_buy) { ?>
+
+                        <?php if (in_array($product->product_id, $cart_prod)) { ?>
+                            <button type="submit" class="product-cart__buy btn add_more"
+                                    onclick="jQuery('#to').val('cart');">ДОБАВИТЬ ЕЩЕ
+                            </button>
+                        <?php } else { ?>
+
+                            <button type="submit" onclick="jQuery('#to').val('cart');"
+                                    class="product-cart__buy btn"><?php print _JSHOP_ADD_TO_CART ?></button>
+                        <?php } ?>
+                    <?php } ?>
+
+
                     <?php print $this->_tmp_product_html_buttons; ?>
 
                 </div>
@@ -121,23 +149,13 @@ $messages = JFactory::getApplication()->getMessageQueue();
 
             </form>
 
-            <?php foreach ($in->products as $a => $prod_in_cart) :
-                $prod_in_cart_id = $prod_in_cart['product_id'];
-                settype($prod_in_cart_id, 'string');
-//    var_dump($prod_in_cart_id);
-//    var_dump($product->product_id);
-                ?>
-
-                <?php if ($prod_in_cart_id == $product->product_id) {
-                echo '<strong class="warnings">' . 'Товар в корзине, хотите добавить еще?' . '</strong>';
-            }
-                ?>
-            <?php endforeach; ?>
             <?php
             if (is_array($messages)) {
                 echo '<div class="warnings">';
                 foreach ($messages as $message)
-                    echo '<div class="' . $message['type'] . '">' . $message['message'] . '</div>';
+                    if ($message['type'] != "message") {
+                        echo '<div class="' . $message['type'] . '">' . $message['message'] . '</div>';
+                    }
                 echo '</div>';
 
             };
@@ -145,7 +163,7 @@ $messages = JFactory::getApplication()->getMessageQueue();
 
 
         <?php } else { ?>
-            <strong>Нет в наличии</strong>
+            <strong class="not-available">Нет в наличии</strong>
         <?php } ?>
         <?php print $this->_tmp_product_html_after_buttons; ?>
 

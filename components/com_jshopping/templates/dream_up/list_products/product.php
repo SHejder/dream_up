@@ -31,25 +31,25 @@ $objcart = $session->get('cart');
 $in_cart = unserialize($objcart);
 $in = jshopCart::reCreate($in_cart);
 
-//var_dump(getFilters());
+$cart_prod = [];
+for ($i = 0; $i < count($in->products); $i++) {
+    $cart_prod[$i] = $in->products[$i]['product_id'];
+}
 
 ?>
 
 
     <div class="product productitem_<?php print $product->product_id ?>">
-        <?php foreach ($in->products as $a => $prod_in_cart) :
-            $prod_in_cart_id = $prod_in_cart['product_id'];
-            settype($prod_in_cart_id, 'string');
-//    var_dump($prod_in_cart_id);
-//    var_dump($product->product_id);
-            ?>
-
-            <?php if ($prod_in_cart_id == $product->product_id) {
-            echo '<strong class="warnings">' . 'Товар в корзине' . '</strong>';
-        }
-            ?>
-        <?php endforeach; ?>
-
+        <!--        --><?php //foreach ($in->products as $a => $prod_in_cart) :
+        //            $prod_in_cart_id = $prod_in_cart['product_id'];
+        //            settype($prod_in_cart_id, 'string');
+        //            ?>
+        <!---->
+        <!--            --><?php //if ($prod_in_cart_id == $product->product_id) {
+        //            echo '<strong class="warnings">' . 'Товар в корзине' . '</strong>';
+        //        }
+        //            ?>
+        <!--        --><?php //endforeach; ?>
 
 
         <?php if ($product->image) { ?>
@@ -106,8 +106,14 @@ $in = jshopCart::reCreate($in_cart);
 
             <?php if (!$hide_buy) { ?>
 
-                <input type="submit" class="product__buy" value="<?php print _JSHOP_ADD_TO_CART ?>"
-                       onclick="jQuery('#to').val('cart');"/>
+                <?php if (in_array($product->product_id, $cart_prod)) { ?>
+                    <input type="submit" class="product__buy add_more" value="ДОБАВИТЬ ЕЩЕ"
+                           onclick="jQuery('#to').val('cart');"/>
+                <?php } else { ?>
+
+                    <input type="submit" class="product__buy" value="<?php print _JSHOP_ADD_TO_CART ?>"
+                           onclick="jQuery('#to').val('cart');"/>
+                <?php } ?>
             <?php } ?>
 
 
@@ -118,11 +124,10 @@ $in = jshopCart::reCreate($in_cart);
 
         </form>
         <?php if ($hide_buy) { ?>
-            <strong>Нет в наличии</strong>
+            <strong class="not-available">Нет в наличии</strong>
         <?php } ?>
 
 
     </div>
 
 <?php print $product->_tmp_var_end ?>
-<?php //var_dump($product) ?>

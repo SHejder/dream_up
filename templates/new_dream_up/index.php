@@ -12,7 +12,8 @@ $doc->addStyleSheet($template_url . '/css/ui.min.css');
 $doc->addStyleSheet($template_url . '/css/main.css');
 
 $is_home_page = $menu->getActive() == $menu->getDefault($lang->getTag());
-
+$urls=array('/collection/cart/view','/component/users/','/collection/checkout/step2',
+    '/collection/checkout/step3','/collection/checkout/step4','/collection/checkout/step5',);
 
 ?>
 
@@ -28,7 +29,7 @@ $is_home_page = $menu->getActive() == $menu->getDefault($lang->getTag());
     <![endif]-->
 
 </head>
-<body class="<?php if ($is_home_page) { ?>homepage<?php } else { ?>inner-page<?php } ?>">
+<body class="<?php if ($is_home_page) { ?>homepage<?php } else { ?>inner-page<?php } ?> <?php if (($menu->getActive()->title == "Вход в личный кабинет") || in_array(JFactory::getURI()->getPath(),$urls))  { ?>head-over-heels<?php } ?>">
 <!-- WRAPPER begin -->
 <div class="layout-wrapper">
     <!-- HEADER begin -->
@@ -397,7 +398,7 @@ $is_home_page = $menu->getActive() == $menu->getDefault($lang->getTag());
 
     <!--scripts-->
     <!--/scripts-->
-
+<?php var_dump(JFactory::getURI()->getPath()); ?>
 </div>
 <!-- WRAPPER end -->
 <script src="<?php echo $template_url . '/js/vendor.min.js' ?>"></script>

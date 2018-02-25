@@ -1063,11 +1063,22 @@ jQuery('.ordering__item').on('click', '.ordering__item-title', function () {
 
 });
 
-jQuery('.js-callback').on('click', function () {
+jQuery('.js-callback').on('click', function (event) {
+	if( window.innerWidth < 1024 ){
+	event.preventDefault();
+	event.stopPropagation();
+	}
     jQuery('.overlay').addClass('is-active'); 
+});
+jQuery('.overlay__content, .overlay__heading').on('click', function (event) {
+	if( window.innerWidth < 1024 ){
+	event.stopPropagation();
+	}
+	
 });
 
 jQuery('body').on('click', '.overlay__close', function () {
+	console.log('overlay__close');
     jQuery('.overlay').removeClass('is-active');
 });
 jQuery('body').on('click', '.overlay__bg', function () {

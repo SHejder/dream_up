@@ -12,9 +12,10 @@ $data_row = $db->loadObjectList();
 $data_row = listProductUpdateData($data_row);
 $jshopConfig = JSFactory::getConfig();
 $hide_buy = 0;
-//if ($jshopConfig->user_as_catalog) $hide_buy = 1;
-//if ($jshopConfig->hide_buy_not_avaible_stock && $product->product_quantity <= 0) $hide_buy = 1;
-//if (!$product->_display_price) $hide_buy = 1;
+$cart_prod=[];
+for ($i=0 ;$i < count($in->products);$i++ ) {
+    $cart_prod[$i]=$in->products[$i]['product_id'];
+}
 
 
 addLinkToProducts($data_row, 0, 1);
@@ -78,9 +79,14 @@ addLinkToProducts($data_row, 0, 1);
 
                 </div>
                 <?php if (!$hide_buy) { ?>
+                    <?php if (in_array($product->product_id, $cart_prod)) { ?>
+                        <input type="submit" class="product__buy add_more" value="ДОБАВИТЬ ЕЩЕ"
+                               onclick="jQuery('#to').val('cart');"/>
+                    <?php } else { ?>
 
-                    <input type="submit" class="product__buy" value="<?php print _JSHOP_ADD_TO_CART ?>"
-                           onclick="jQuery('#to').val('cart');"/>
+                        <input type="submit" class="product__buy" value="<?php print _JSHOP_ADD_TO_CART ?>"
+                               onclick="jQuery('#to').val('cart');"/>
+                    <?php } ?>
                 <?php } ?>
 
                 <input type="hidden" name="to" id='to' value="cart"/>
@@ -91,7 +97,7 @@ addLinkToProducts($data_row, 0, 1);
                 <?php print $product->_tmp_var_bottom_buttons; ?>
             </form>
             <?php if ($hide_buy) { ?>
-                <strong>Нет в наличии</strong>
+                <strong class="not-available">Нет в наличии</strong>
             <?php } ?>
 
 

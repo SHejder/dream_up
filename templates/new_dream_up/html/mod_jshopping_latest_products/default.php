@@ -3,6 +3,11 @@
 <?php
 $jshopConfig = JSFactory::getConfig();
 $hide_buy = 0;
+$cart_prod=[];
+for ($i=0 ;$i < count($in->products);$i++ ) {
+    $cart_prod[$i]=$in->products[$i]['product_id'];
+}
+
 
 ?>
 <div class="product-carousel__carousel owl-carousel">
@@ -55,9 +60,14 @@ $hide_buy = 0;
 
                 </div>
                 <?php if (!$hide_buy) { ?>
+                    <?php if (in_array($product->product_id, $cart_prod)) { ?>
+                        <input type="submit" class="product__buy add_more" value="ДОБАВИТЬ ЕЩЕ"
+                               onclick="jQuery('#to').val('cart');"/>
+                    <?php } else { ?>
 
-                    <input type="submit" class="product__buy" value="<?php print _JSHOP_ADD_TO_CART ?>"
-                           onclick="jQuery('#to').val('cart');"/>
+                        <input type="submit" class="product__buy" value="<?php print _JSHOP_ADD_TO_CART ?>"
+                               onclick="jQuery('#to').val('cart');"/>
+                    <?php } ?>
                 <?php } ?>
 
                 <input type="hidden" name="to" id='to' value="cart"/>
@@ -66,7 +76,7 @@ $hide_buy = 0;
                 <?php print $product->_tmp_var_bottom_buttons; ?>
             </form>
             <?php if ($hide_buy) { ?>
-                <strong>Нет в наличии</strong>
+                <strong class="not-available">Нет в наличии</strong>
             <?php } ?>
 
 

@@ -12,8 +12,8 @@ $doc->addStyleSheet($template_url . '/css/ui.min.css');
 $doc->addStyleSheet($template_url . '/css/main.css');
 
 $is_home_page = $menu->getActive() == $menu->getDefault($lang->getTag());
-$urls=array('/collection/cart/view','/component/users/','/collection/checkout/step2',
-    '/collection/checkout/step3','/collection/checkout/step4','/collection/checkout/step5',);
+$urls=array('/katalog/cart/view','/component/users/','/katalog/checkout/step2',
+    '/katalog/checkout/step3','/katalog/checkout/step4','/katalog/checkout/step5',);
 
 ?>
 
@@ -398,7 +398,6 @@ $urls=array('/collection/cart/view','/component/users/','/collection/checkout/st
 
     <!--scripts-->
     <!--/scripts-->
-<?php var_dump(JFactory::getURI()->getPath()); ?>
 </div>
 <!-- WRAPPER end -->
 <script src="<?php echo $template_url . '/js/vendor.min.js' ?>"></script>

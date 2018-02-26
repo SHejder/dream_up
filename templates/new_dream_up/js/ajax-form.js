@@ -8,12 +8,8 @@ $(document).ready(function () {
             return;
         }
 
-        ajaxSubmit($form.data('submitted', true));
+
+        // ajaxSubmit($form.data('submitted', true));
     });
 
-    $('body').on('click', '.ajax_hidden_form', function (e) {
-        var form_id = $(this).data('form-id');
-        $('#'+form_id).submit();
-        return false;
-    });
 });

@@ -49,6 +49,7 @@ var ajaxSubmit = function (form) {
 
     $.ajax({
         url:         $form.attr('action'),
+        dataType:   "json",
         type:        $form.attr('method'),
         data:        new FormData($form[0]),
         processData: false,
@@ -62,7 +63,7 @@ var ajaxSubmit = function (form) {
          */
         function (data) {
             notify(data.message, data.success ? 'success' : 'error');
-
+            console.log();
             if (data.redirectUrl) {
                 setTimeout(function () {
                     location.href = data.redirectUrl;

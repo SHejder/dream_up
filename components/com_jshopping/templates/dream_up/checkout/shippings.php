@@ -8,6 +8,8 @@
 */
 defined('_JEXEC') or die('Restricted access');
 ?>
+<h1>Оформление заказа без регистрации</h1>
+
 <div id="comjshop">
     <?php print $this->checkout_navigator?>
     <?php print $this->small_cart?>

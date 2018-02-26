@@ -9,7 +9,7 @@
 defined('_JEXEC') or die('Restricted access');
 ?>
 <!--<div class = "jshop pagelogin" id="comjshop">    -->
-<?php print $this->checkout_navigator ?>
+<?php //print $this->checkout_navigator ?>
 
 <h1><?php print _JSHOP_LOGIN ?></h1>
 
@@ -31,10 +31,7 @@ defined('_JEXEC') or die('Restricted access');
     <?php endif; ?>
 
     <?php echo $this->tmpl_login_html_1 ?>
-    <!--        <div class="span6 login_block">-->
     <?php echo $this->tmpl_login_html_2 ?>
-    <!--            <div class="small_header">--><?php //print _JSHOP_HAVE_ACCOUNT ?><!--</div>-->
-    <!--            <div class="logintext">--><?php //print _JSHOP_PL_LOGIN ?><!--</div>-->
     <div class="ordering__item">
         <?php if ($this->config->shop_user_guest && $this->show_pay_without_reg) : ?>
         <button class="ordering__item-title"><span>У меня уже есть учетная запись</span></button>
@@ -52,11 +49,6 @@ defined('_JEXEC') or die('Restricted access');
                 <div class="form__item -email-password">
                     <label><?php print _JSHOP_PASSWORT ?></label>
                     <input type="password" name="passwd" placeholder="Пароль">
-                    <!--                    <div class="error">-->
-                    <!--                        <ul>-->
-                    <!--                            <li>Неверный пароль</li>-->
-                    <!--                        </ul>-->
-                    <!--                    </div>-->
                 </div>
                 <div class="custom-checkbox">
                     <label class="required">
@@ -88,7 +80,7 @@ defined('_JEXEC') or die('Restricted access');
             <button class="ordering__item-title"><span>Я хочу оформить заказ БЕЗ регистрации</span></button>
             <div class="ordering__item-content form">
 
-                    <form action = "/collection/checkout/step2save" method = "post" name = "loginForm" onsubmit = "return validateCheckoutAdressForm('<?php print $this->live_path ?>', this.name)" class = "form-horizontal" autocomplete="off" enctype="multipart/form-data">
+                    <form action = "/katalog/checkout/step2save" method = "post" name = "loginForm" onsubmit = "return validateCheckoutAdressForm('<?php print $this->live_path ?>', this.name)" class = "form-horizontal" autocomplete="off" enctype="multipart/form-data">
                         <?php print $this->_tmp_ext_html_address_start?>
 
                         <?php if ($config_fields['l_name']['display']){?>
@@ -160,11 +152,6 @@ defined('_JEXEC') or die('Restricted access');
                         <a href="<?php print $this->href_register ?>">Зарегистрируйтесь</a> пожалуйста!
 <!--                        --><?php //print _JSHOP_REGISTER ?>
                     </div>
-<!--                    <div class="block_button_register">-->
-<!--                        <input type="button" class="btn button" value="--><?php //print _JSHOP_REGISTRATION ?><!--"-->
-<!--                               onclick="location.href=syh'--><?php //print $this->href_register ?>
-<!--                    ';"/>-->
-<!--                   </div>-->
                 <?php } else { ?>
                     <?php $hideheaderh1 = 1;
                     include(dirname(__FILE__) . "/register.php"); ?>

@@ -151,14 +151,14 @@ class jshopCheckout extends jshopBase{
                 $url = SEFLink('index.php?option=com_jshopping&controller=checkout&task=step'.$key,0,0,$jshopConfig->use_ssl);
             }
             if ($key < $step && !($jshopConfig->step_4_3 && $key==3 && $step==4) || ($jshopConfig->step_4_3 && $key==4 && $step==3)){
-                $output[$key] = '<span class="not_active_step"><a href="'.$url.'">'.$value.'</a></span>';
+                $output[$key] = '<a class="ordering-step__item is-link" href="'.$url.'">'.$value.'</a>';
                 $cssclass[$key] = "prev";
             }else{
                 if ($key == $step){
-                    $output[$key] = '<span id="active_step"  class="active_step">'.$value.'</span>';
+                    $output[$key] = '<span class="ordering-step__item is-active">'.$value.'</span>';
                     $cssclass[$key] = "active";
                 }else{
-                    $output[$key] = '<span class="not_active_step">'.$value.'</span>';
+                    $output[$key] = '<span class="ordering-step__item">'.$value.'</span>';
                     $cssclass[$key] = "next";
                 }
             }

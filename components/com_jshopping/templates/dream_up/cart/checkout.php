@@ -87,6 +87,16 @@ defined('_JEXEC') or die();
                     class="cart__total-cost"><?php print formatprice(-$this->discount); ?><?php print $this->_tmp_ext_discount; ?></th>
             </tr>
         <?php } ?>
+        <?php if (isset($this->summ_delivery)){?>
+            <tr>
+                <th colspan="4" class="cart__total-text -min"><?php print _JSHOP_SHIPPING_PRICE;?></th>
+                <th colspan="2"
+                    class="cart__total-cost -min"><?php print formatprice($this->summ_delivery);?><?php print $this->_tmp_ext_shipping?>
+                </th>
+            </tr>
+
+        <?php } ?>
+
         <?php if (!$this->config->hide_tax) { ?>
             <?php foreach ($this->tax_list as $percent => $value) { ?>
                 <tr>
@@ -103,14 +113,6 @@ defined('_JEXEC') or die();
             <th colspan="2"
                 class="cart__total-cost"><?php print formatprice($this->fullsumm); ?><?php print $this->_tmp_ext_total; ?></th>
         </tr>
-        <?php if ($this->config->show_plus_shipping_in_product) { ?>
-            <tr>
-                <th colspan="4" class="cart__total-text"><?php print _JSHOP_PRICE_TOTAL; ?></th>
-                <th colspan="2"
-                    class="cart__total-cost"><?php print sprintf(_JSHOP_PLUS_SHIPPING, $this->shippinginfo); ?></th>
-            </tr>
-
-        <?php } ?>
         <?php if ($this->free_discount > 0) { ?>
             <tr>
                 <th colspan="4" class="cart__total-text"><?php print _JSHOP_PRICE_TOTAL; ?></th>
@@ -122,115 +124,10 @@ defined('_JEXEC') or die();
         <?php } ?>
 
     </table>
-    </form>
 </div>
 
 
-<div class="cart__info">
-    <?php
-    preg_match_all('!\d+!', $this->cartdescr, $matches);
-    $min_order_summ = implode(' ', $matches[0]);
-    if (!is_numeric($min_order_summ)) $min_order_summ = 0;
-    ?>
-    <div class="cart__info-item -min-cost<?php if ($this->summ < $min_order_summ) echo ' min_order_summ'; ?>"><?php print $this->cartdescr; ?></div>
 
-<div class="cartdescr"><?php print $this->checkoutcartdescr;?></div>
-  
-<table class = "jshop jshop_subtotal">
-    <?php if (!$this->hide_subtotal){?>
-        <tr class="subtotal">    
-            <td class = "name">
-                <?php print _JSHOP_SUBTOTAL ?>
-            </td>
-            <td class = "value">
-                <?php print formatprice($this->summ);?><?php print $this->_tmp_ext_subtotal?>
-            </td>
-        </tr>
-    <?php } ?>
-
-    <?php print $this->_tmp_html_after_subtotal?>
-
-    <?php if ($this->discount > 0){ ?>
-        <tr class="discount">
-            <td class = "name">
-                <?php print _JSHOP_RABATT_VALUE ?><?php print $this->_tmp_ext_discount_text?>
-            </td>
-            <td class = "value">
-                <?php print formatprice(-$this->discount);?><?php print $this->_tmp_ext_discount?>
-            </td>
-        </tr>
-    <?php } ?>
-
-    <?php if (isset($this->summ_delivery)){?>
-        <tr class="shipping">
-            <td class = "name">
-                <?php print _JSHOP_SHIPPING_PRICE;?>
-            </td>
-            <td class = "value">
-                <?php print formatprice($this->summ_delivery);?><?php print $this->_tmp_ext_shipping?>
-            </td>
-        </tr>
-    <?php } ?>
-
-    <?php if (isset($this->summ_package)){?>
-        <tr class="package">
-            <td class = "name">
-                <?php print _JSHOP_PACKAGE_PRICE;?>
-            </td>
-            <td class = "value">
-                <?php print formatprice($this->summ_package);?><?php print $this->_tmp_ext_shipping_package?>
-            </td>
-        </tr>
-    <?php } ?>
-
-    <?php if ($this->summ_payment != 0){ ?>
-        <tr class="payment">
-            <td class = "name">
-                <?php print $this->payment_name;?>
-            </td>
-            <td class = "value">
-                <?php print formatprice($this->summ_payment);?><?php print $this->_tmp_ext_payment?>
-            </td>
-        </tr>
-    <?php } ?>
-
-    <?php if (!$this->config->hide_tax){ ?>
-        <?php foreach($this->tax_list as $percent=>$value){?>
-            <tr class="tax">
-                <td class = "name">
-                    <?php print displayTotalCartTaxName();?>
-                    <?php if ($this->show_percent_tax) print formattax($percent)."%"?>
-                </td>
-                <td class = "value">
-                    <?php print formatprice($value);?><?php print $this->_tmp_ext_tax[$percent]?>
-                </td>
-            </tr>
-        <?php } ?>
-    <?php } ?>
-
-    <tr class="total">
-        <td class = "name">
-            <?php print $this->text_total; ?>
-        </td>
-        <td class = "value">
-            <?php print formatprice($this->fullsumm)?><?php print $this->_tmp_ext_total?>
-        </td>
-    </tr>
-
-    <?php print $this->_tmp_html_after_total?>
-
-    <?php if ($this->free_discount > 0){?>  
-        <tr class="free_discount">
-            <td colspan="2" align="right">    
-                <span class="free_discount">
-                    <?php print _JSHOP_FREE_DISCOUNT;?>:
-                    <span><?php print formatprice($this->free_discount); ?></span>
-                </span>
-            </td>
-        </tr>
-    <?php }?>  
-</table>
 
 <?php print $this->_tmp_html_after_checkout_cart?>
 
-</div>

@@ -13,7 +13,6 @@ defined('_JEXEC') or die('Restricted access');
     <div class="form">
         <?php
         $config_fields = $this->config_fields;
-        include(dirname(__FILE__)."/adress.js.php");
         ?>
 
         <form action = "<?php print $this->action ?>" method = "post" name = "loginForm" onsubmit = "return validateCheckoutAdressForm('<?php print $this->live_path ?>', this.name)" class = "form-horizontal" autocomplete="off" enctype="multipart/form-data">
@@ -59,6 +58,84 @@ defined('_JEXEC') or die('Restricted access');
             </div>
             <?php } ?>
             <?php echo $this->_tmpl_address_html_3?>
+
+            <?php if ($this->count_filed_delivery > 0){?>
+                <div class="form__item -radio">
+                    <label>Доставка на ваш адрес?
+                        <label class="custom-radio">
+                            <input type="radio" name="delivery_adress" id="delivery_adress_1"
+                                   value="0" <?php if (!$this->delivery_adress) { ?> checked="checked" <?php } ?>
+                                   onclick="jQuery('#div_delivery').hide()"/>
+                            <span><?php print _JSHOP_NO ?></span>
+
+                        </label>
+                        <label class="custom-radio">
+                            <input type="radio" name="delivery_adress" id="delivery_adress_2"
+                                   value="1" <?php if ($this->delivery_adress) { ?> checked="checked" <?php } ?>
+                                   onclick="jQuery('#div_delivery').show()"/>
+                            <span><?php print _JSHOP_YES ?></span>
+
+                        </label>
+                    </label>
+
+                </div>
+            <?php }?>
+
+            <div id = "div_delivery" class = "jshop_register" style = "padding-bottom:0px;<?php if (!$this->delivery_adress){ ?>display:none;<?php } ?>">
+                <?php echo $this->_tmpl_address_html_5 ?>
+                <?php if ($config_fields['d_zip']['display']){?>
+
+                <div class="form__item">
+                    <label><?php print _JSHOP_ZIP ?> *</label>
+                    <input type="text" name="d_zip" id="d_zip" value="<?php print $this->user->d_zip ?>"/>
+                </div>
+                <?php } ?>
+                <?php if ($config_fields['d_state']['display']){?>
+
+                <div class="form__item">
+                    <label>Регион *</label>
+                    <input type="text" name="d_state" id="d_state" value="<?php print $this->user->d_state ?>" />
+                </div>
+                <?php } ?>
+                <?php if ($config_fields['d_city']['display']){?>
+
+                <div class="form__item">
+                    <label>Населённый пункт *</label>
+                    <input type="text" name="d_city" id="d_city" value="<?php print $this->user->d_city ?>"
+                    />
+                </div>
+                <?php } ?>
+                <?php if ($config_fields['d_street']['display']){?>
+
+                <div class="form__item">
+                    <label>Улица *</label>
+
+                    <input type="text" name="d_street" id="d_street"
+                           value="<?php print $this->user->d_street ?>" />
+                </div>
+                <?php } ?>
+                <?php if ($config_fields['d_home']['display']){?>
+
+                <div class="form__item">
+                    <label><?php print _JSHOP_HOME ?> *</label>
+                    <input type="text" name="d_home" id="d_home" value="<?php print $this->user->d_home ?>"
+                    />
+                </div>
+                <?php } ?>
+                <?php if ($config_fields['d_apartment']['display']){?>
+
+                <div class="form__item">
+                    <label><?php print _JSHOP_APARTMENT ?> *</label>
+
+                    <input type="text" name="d_apartment" id="d_apartment"
+                           value="<?php print $this->user->d_apartment ?>" />
+                </div>
+                <?php } ?>
+
+                <?php echo $this->_tmpl_address_html_6 ?>
+
+            </div>
+
 
 
             <div class="custom-checkbox">

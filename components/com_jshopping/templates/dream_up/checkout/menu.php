@@ -8,12 +8,8 @@
 */
 defined('_JEXEC') or die('Restricted access');
 ?>
-<table class = "jshop" id = "jshop_menu_order">
-  <tr>
+<div class="ordering-step">
     <?php foreach($this->steps as $k=>$step){?>
-      <td class = "jshop_order_step <?php print $this->cssclass[$k]?>">
         <?php print $step;?>
-      </td>
     <?php }?>
-  </tr>
-</table>
+</div>

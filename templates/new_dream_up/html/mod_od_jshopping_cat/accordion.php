@@ -15,37 +15,37 @@ foreach ($arResult
     <?php endif ?>
     <?php if ($arItem["IS_PARENT"]): ?>
     <?php if ($arItem["DEPTH"] == 1): ?>
-    <li class="has-dropdown">
+    <li class="has-dropdown <?php if ($arItem["SELECTED"]): ?> active is-open<?php endif ?>">
     <a href="<?php echo $arItem["LINK"] ?>">
         <?php echo $arItem["NAME"] ?><?php if ($count) {
             echo ' (' . $arItem["COUNT"] . ')';
         } ?>
     </a>
-    <div class="dropdown">
+    <div class="dropdown"<?php if ($arItem["SELECTED"]): ?> style="display: block" <?php endif ?>>
     <ul>
     <?php else: ?>
-    <li class="has-dropdown <?php if ($arItem["SELECTED"]): ?> active<?php endif ?>">
-    <a href="<?php echo $arItem["LINK"] ?>" class="parent<?php if ($arItem["SELECTED"]): ?> active<?php endif ?>">
+    <li class="has-dropdown <?php if ($arItem["SELECTED"]): ?> active is-open<?php endif ?>" >
+    <a href="<?php echo $arItem["LINK"] ?>" class="parent">
         <?php echo $arItem["NAME"] ?><?php if ($count) {
             echo ' (' . $arItem["COUNT"] . ')';
         } ?>
     </a>
-    <div class="dropdown">
+    <div class="dropdown" <?php if ($arItem["SELECTED"]): ?> style="display: block" <?php endif ?>>
     <ul>
     <?php endif ?>
     <?php else: ?>
         <?php if ($arItem["DEPTH"] == 1): ?>
-            <li >
+            <li class="root<?php if ($arItem["SELECTED"]): ?> active<?php endif ?>">
                 <a href="<?php echo $arItem["LINK"] ?>"
-                   class="root<?php if ($arItem["SELECTED"]): ?> active<?php endif ?>">
+                   class="root">
                     <?php echo $arItem["NAME"] ?><?php if ($count) {
                         echo ' (' . $arItem["COUNT"] . ')';
                     } ?>
                 </a>
             </li>
         <?php else: ?>
-            <li>
-                <a href="<?php echo $arItem["LINK"] ?>" <?php if ($arItem["SELECTED"]): ?>class="active"<?php endif ?>>
+            <li class="root<?php if ($arItem["SELECTED"]): ?> active<?php endif ?>">
+                <a href="<?php echo $arItem["LINK"] ?>" >
                     <?php echo $arItem["NAME"] ?><?php if ($count) {
                         echo ' (' . $arItem["COUNT"] . ')';
                     } ?>

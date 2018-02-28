@@ -2103,7 +2103,7 @@ table.cellpading_15 td, table.cellpading_15 th {
   text-decoration: underline;
 }
 
-.menu-left li li.active a {
+.menu-left li li.active > a {
   color: #a94188;
   text-decoration: underline;
 }

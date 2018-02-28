@@ -1,11 +1,11 @@
 // var jQuery = jQuery;
 // console.log(jQuery);
-var scrollComponent = (function(){
+var scrollComponent = (function () {
 
     var scrollPosition = {
-        current : 0,
-        previous : 0,
-        backup : 0
+        current: 0,
+        previous: 0,
+        backup: 0
     };
 
     // PRIVATE =========================================================================================================
@@ -17,7 +17,7 @@ var scrollComponent = (function(){
 
     /* scroll to */
     scrollMoveTo = function (position) {
-        window.scrollTo( 0, position );
+        window.scrollTo(0, position);
     };
 
     /* save scroll position */
@@ -39,14 +39,14 @@ var scrollComponent = (function(){
 
     /* return down || up */
     scrollDirection = function () {
-        return ( scrollPosition.current >= scrollPosition.previous ) ? 'down' : 'up';
+        return (scrollPosition.current >= scrollPosition.previous) ? 'down' : 'up';
     };
 
 
     // INIT ============================================================================================================
 
     scrollCheck();
-    window.addEventListener('scroll', function() {
+    window.addEventListener('scroll', function () {
         scrollCheck();
     });
 
@@ -54,8 +54,8 @@ var scrollComponent = (function(){
     // PUBLIC ==========================================================================================================
 
     return {
-        current : function(value){
-            if(typeof value !== "undefined"){
+        current: function (value) {
+            if (typeof value !== "undefined") {
                 scrollMoveTo(value);
                 scrollCheck();
             }
@@ -64,33 +64,34 @@ var scrollComponent = (function(){
                 return scrollPosition.current;
             }
         },
-        direction : function(){ return scrollDirection() },
-        enable : function(){
+        direction: function () {
+            return scrollDirection()
+        },
+        enable: function () {
             scrollEnable();
             scrollMoveTo(scrollPosition.backup);
         },
-        disable : function(){
+        disable: function () {
             scrollSave();
             scrollDisable();
         }
     }
 }());
 var app = {
-    helper : {
-        scroll : scrollComponent
+    helper: {
+        scroll: scrollComponent
     },
-    ui : {
-        components : {
-
-        }
+    ui: {
+        components: {}
     }
 };
-function MediaEventListener(queryOption){
+
+function MediaEventListener(queryOption) {
     var _self = this;
     _self.resolutionCurr = window.innerWidth;
     _self.resolutionLast = 0;
     // default device breakpoints или из опций при инициализации
-    _self.queries = (typeof queryOption !== undefined) ? queryOption :[
+    _self.queries = (typeof queryOption !== undefined) ? queryOption : [
         {
             name: 'mobile',
             minResolution: 0,
@@ -126,21 +127,23 @@ function MediaEventListener(queryOption){
     ];
 
     // добавление функций на разные разрешения
-    _self.addQueryAction = function(queryName, func){
-        _self.queries.forEach(function(item){
-            if( item.name === queryName){
+    _self.addQueryAction = function (queryName, func) {
+        _self.queries.forEach(function (item) {
+            if (item.name === queryName) {
                 item.callback.push(func);
             }
         });
     };
 
     // выполняем скрипты для перехода на конкретное разршенеие
-    _self.doQueryAction = function(queryName){
-        _self.queries.forEach(function(item){
+    _self.doQueryAction = function (queryName) {
+        _self.queries.forEach(function (item) {
             // ищем нужное разрешение
-            if( item.name === queryName){
+            if (item.name === queryName) {
                 // запускаем все колбэки
-                item.callback.forEach(function(item){ item(); });
+                item.callback.forEach(function (item) {
+                    item();
+                });
             }
         });
 
@@ -151,14 +154,18 @@ function MediaEventListener(queryOption){
         // определяем текущее разрешение
         _self.resolutionCurr = window.innerWidth;
         // проходим по всем разрешениям
-        _self.queries.forEach(function(screen){
-            if( screen.minResolution <= _self.resolutionCurr && _self.resolutionCurr <= screen.maxResolution ){
+        _self.queries.forEach(function (screen) {
+            if (screen.minResolution <= _self.resolutionCurr && _self.resolutionCurr <= screen.maxResolution) {
 
                 // выполняем подвешеные скрипты, если на этом разрешение их нужно выполнять при каждом ресайзе
-                if(screen.isEach){ _self.doQueryAction(screen.name); }
+                if (screen.isEach) {
+                    _self.doQueryAction(screen.name);
+                }
 
                 // если сменилось на активное, то выполняем подвешеные скрипты
-                if(!screen.isActive && !screen.isEach){ _self.doQueryAction(screen.name); }
+                if (!screen.isActive && !screen.isEach) {
+                    _self.doQueryAction(screen.name);
+                }
                 screen.isActive = true;
 
             } else {
@@ -167,48 +174,45 @@ function MediaEventListener(queryOption){
             }
         });
         // запоминаем разрешение
-        _self.resolutionLast =  _self.resolutionCurr;
+        _self.resolutionLast = _self.resolutionCurr;
 
     };
 
     // инициализация
-    _self.init = function(){
+    _self.init = function () {
         // запускаем проход по всем разрешениям для первой загрузки
         _self.resize();
         // и вешаем обработчик на все последущюие ресайзы
-        window.onresize =  function resize(){
+        window.onresize = function resize() {
             _self.resize();
         }
 
     };
 
     _self.debug = function () {
-        console.log( _self.queries );
+        console.log(_self.queries);
     };
 
 }
 
 
-
-
-
-(function( jQuery ){
+(function (jQuery) {
 
     var defaults = {
         // дефолтные опции
         minResolution: 1000
     };
-    var states ={
+    var states = {
         hasExtra: false
     };
 
     var methods = {
 
-        init : function( options ) {
+        init: function (options) {
 
             options = jQuery.extend({}, defaults, options);
 
-            this.each(function() {
+            this.each(function () {
 
                 var container = jQuery(this);
                 var menuRoot = jQuery(this).find('ul').not('ul ul');
@@ -222,9 +226,9 @@ function MediaEventListener(queryOption){
                 containerWidth = menuRoot.width();
                 methods.hideItem(menuRoot, menuItems, containerWidth);
 
-                window.addEventListener("resize", function() {
+                window.addEventListener("resize", function () {
                     containerWidth = menuRoot.width();
-                    if(containerWidth > options.minResolution){
+                    if (containerWidth > options.minResolution) {
                         methods.hideItem(menuRoot, menuItems, containerWidth);
                     }
                 });
@@ -232,37 +236,37 @@ function MediaEventListener(queryOption){
             });
         },
 
-        resize : function () {
+        resize: function () {
 
         },
 
         addExtraBar: function (menuRoot, menuItems) {
             var extrabarContent = '';
-            for(var i = 0; i < menuItems.length; i++){
+            for (var i = 0; i < menuItems.length; i++) {
                 extrabarContent = extrabarContent + menuItems.eq(i).get(0).outerHTML;
             }
 
             menuRoot.append(
                 '<li class="menu-top__item -extraBar -has-drop-down -drop-down-inverse">' +
-                    '<button class="menu-top__item-name">...</button>' +
-                    '<div class="menu-top__drop-down">' +
-                        '<ul class="menu-top__list">' +
-                            extrabarContent +
-                        '</ul>' +
-                    '</div>' +
+                '<button class="menu-top__item-name">...</button>' +
+                '<div class="menu-top__drop-down">' +
+                '<ul class="menu-top__list">' +
+                extrabarContent +
+                '</ul>' +
+                '</div>' +
                 '</li>'
             );
             menuRoot.find('.-extraBar .menu-top__drop-down .menu-top__drop-down').remove();
         },
 
         // удаляет дополнительную выпадашку
-       removeExtraBar : function (menuRoot) {
-           menuRoot.find('.-extraBar').remove();
-       },
+        removeExtraBar: function (menuRoot) {
+            menuRoot.find('.-extraBar').remove();
+        },
 
 
         // проверяет элементы, если элементу не хватает места, то скрывает его
-        hideItem : function (menuRoot, menuItems, containerWidth) {
+        hideItem: function (menuRoot, menuItems, containerWidth) {
             // подготавливаем выпадашку дублёра
             var dubler = menuRoot.find('.-extraBar');
             var dublerList = dubler.find('.menu-top__item');
@@ -273,10 +277,10 @@ function MediaEventListener(queryOption){
             var width = containerWidth;
             var sumWidth = 0;
             states.hasExtra = false;
-            for(var i = 0; i < menuItems.length; i++){
+            for (var i = 0; i < menuItems.length; i++) {
                 var elWidth = menuItems.eq(i).width();
 
-                if(sumWidth + elWidth < width){
+                if (sumWidth + elWidth < width) {
                     // если следующий элемент не влазит
                     sumWidth = sumWidth + elWidth;
                     dublerList.eq(i).addClass('-hidden');
@@ -285,7 +289,7 @@ function MediaEventListener(queryOption){
                 } else {
                     // если элемент влазит
                     // проверяем влезет ли гамбургер
-                    if(sumWidth + elWidth < width){
+                    if (sumWidth + elWidth < width) {
 
                     }
 
@@ -298,19 +302,20 @@ function MediaEventListener(queryOption){
 
     };
 
-    jQuery.fn.menuSmart = function(method) {
+    jQuery.fn.menuSmart = function (method) {
 
-        if ( methods[method] ) {
-            return methods[ method ].apply( this, Array.prototype.slice.call( arguments, 1 ));
-        } else if ( typeof method === 'object' || ! method ) {
-            return methods.init.apply( this, arguments );
+        if (methods[method]) {
+            return methods[method].apply(this, Array.prototype.slice.call(arguments, 1));
+        } else if (typeof method === 'object' || !method) {
+            return methods.init.apply(this, arguments);
         } else {
-            jQuery.error( 'Метод ' +  method + ' не существует в jQuery.menuSmart' );
+            jQuery.error('Метод ' + method + ' не существует в jQuery.menuSmart');
         }
 
     };
 
-})( jQuery );
+})(jQuery);
+
 function initMenuMobile(id, data) {
 
     var menuMobile = new Vue({
@@ -326,27 +331,27 @@ function initMenuMobile(id, data) {
             show: false
         },
         template:
-            '<transition name="menu-mobile-toggle" mode="out-in">' +
-            '<div class="menu-mobile" id="menu-mobile-' + id + '" v-if="show">' +
-                '<menu-mobile-header v-bind:node="activeNode"></menu-mobile-header>' +
-                '<ul class="menu-mobile__list">' +
-                    '<template  v-for="item in tree">' +
-                        '<menu-mobile-item v-if="item.parentId === activeNode.id" v-bind:item="item" :key="item.id" ></menu-mobile-item>' +
-                    '</template>' +
-                '</ul>' +
-            '</div>' +
-            '</transition>',
+        '<transition name="menu-mobile-toggle" mode="out-in">' +
+        '<div class="menu-mobile" id="menu-mobile-' + id + '" v-if="show">' +
+        '<menu-mobile-header v-bind:node="activeNode"></menu-mobile-header>' +
+        '<ul class="menu-mobile__list">' +
+        '<template  v-for="item in tree">' +
+        '<menu-mobile-item v-if="item.parentId === activeNode.id" v-bind:item="item" :key="item.id" ></menu-mobile-item>' +
+        '</template>' +
+        '</ul>' +
+        '</div>' +
+        '</transition>',
         methods: {
             getNodeParam: function (input) {
                 var result = {};
-                result.id =  input.id;
-                result.name =  input.name;
-                result.parentId =  input.parentId;
+                result.id = input.id;
+                result.name = input.name;
+                result.parentId = input.parentId;
                 return result;
             },
             closeMenu: function () {
                 // jQuery( this.el).hide();
-                this.activeNode = menuMobile.getNodeParam( this.tree[0] );
+                this.activeNode = menuMobile.getNodeParam(this.tree[0]);
                 app.helper.scroll.enable();
                 this.show = false;
             }
@@ -355,27 +360,27 @@ function initMenuMobile(id, data) {
             'menu-mobile-header': {
                 props: ['node'],
                 template:
-                    '<transition name="menu-mobile-header-toggle">' +
-                    '<div class="menu-mobile__header">' +
-                        '<div class="menu-mobile__title">' +
-                            '<button class="menu-mobile__title-btn" :data-node="node.id" v-on:click.prevent="activeParentNode">' +
-                                '<i class="menu-mobile__icon-arrow-right" v-if="node.id"></i>' +
-                                '{{ node.name }}' +
-                            '</button>' +
-                        '</div>' +
-                        '<button class="menu-mobile__switcher-btn" v-on:click.prevent="closeMenu"><span></span></button>' +
-                    '</div>' +
-                    '</transition>',
+                '<transition name="menu-mobile-header-toggle">' +
+                '<div class="menu-mobile__header">' +
+                '<div class="menu-mobile__title">' +
+                '<button class="menu-mobile__title-btn" :data-node="node.id" v-on:click.prevent="activeParentNode">' +
+                '<i class="menu-mobile__icon-arrow-right" v-if="node.id"></i>' +
+                '{{ node.name }}' +
+                '</button>' +
+                '</div>' +
+                '<button class="menu-mobile__switcher-btn" v-on:click.prevent="closeMenu"><span></span></button>' +
+                '</div>' +
+                '</transition>',
                 methods: {
                     closeMenu: function (event) {
                         menuMobile.closeMenu();
                     },
                     activeParentNode: function (event) {
-                        if( this._props.node.parentId !== null ){
+                        if (this._props.node.parentId !== null) {
                             var parentId = this._props.node.parentId;
-                            for(var i = 0; i < menuMobile.tree.length; i++){
+                            for (var i = 0; i < menuMobile.tree.length; i++) {
                                 if (menuMobile.tree[i].id === parentId) {
-                                    menuMobile.activeNode = menuMobile.getNodeParam( menuMobile.tree[i] );
+                                    menuMobile.activeNode = menuMobile.getNodeParam(menuMobile.tree[i]);
                                 }
                             }
                         } else {
@@ -388,24 +393,24 @@ function initMenuMobile(id, data) {
             'menu-mobile-item': {
                 props: ['item', 'activeNode'],
                 template:
-                    '<transition name="menu-mobile-item-show" mode="out-in">' +
-                    '<li class="menu-mobile__item">' +
-                        '<a class="menu-mobile__item-name" v-bind:href="item.href">' +
-                            '{{ item.name }}' +
-                            // иконка со стрелкой, для элементов без потомков
-                            '<span v-if="!item.hasChild" class="menu-mobile__item-btn">' +
-                                '<i class="menu-mobile__icon-arrow-left"></i>' +
-                            '</span>' +
-                        '</a>' +
-                        // для элементов с подкатегориями добавляем кнопочку показывающую эти подразделы
-                        '<button v-if="item.hasChild" class="menu-mobile__item-btn hasChild"  v-on:click.prevent="showChild">' +
-                            '<i class="menu-mobile__icon-more"></i>' +
-                        '</button>' +
-                    '</li>' +
-                    '</transition>',
+                '<transition name="menu-mobile-item-show" mode="out-in">' +
+                '<li class="menu-mobile__item">' +
+                '<a class="menu-mobile__item-name" v-bind:href="item.href">' +
+                '{{ item.name }}' +
+                // иконка со стрелкой, для элементов без потомков
+                '<span v-if="!item.hasChild" class="menu-mobile__item-btn">' +
+                '<i class="menu-mobile__icon-arrow-left"></i>' +
+                '</span>' +
+                '</a>' +
+                // для элементов с подкатегориями добавляем кнопочку показывающую эти подразделы
+                '<button v-if="item.hasChild" class="menu-mobile__item-btn hasChild"  v-on:click.prevent="showChild">' +
+                '<i class="menu-mobile__icon-more"></i>' +
+                '</button>' +
+                '</li>' +
+                '</transition>',
                 methods: {
                     showChild: function (event) {
-                        menuMobile.activeNode = menuMobile.getNodeParam( this._props.item );
+                        menuMobile.activeNode = menuMobile.getNodeParam(this._props.item);
                     }
                 }
             }
@@ -414,7 +419,6 @@ function initMenuMobile(id, data) {
 
     return menuMobile;
 }
-
 
 
 // dependencies
@@ -450,7 +454,7 @@ function initMenuMobile(id, data) {
 // </nav>
 
 
-function MenuMobile(options){
+function MenuMobile(options) {
 
     // Дерево меню, включает в себя только узлы, листья игнорируются
 
@@ -467,13 +471,13 @@ function MenuMobile(options){
         btnToggle: '[data-menu-mobile--switcher-btn]'
     };
 
-    var id = Math.round( Math.random()*10000);
+    var id = Math.round(Math.random() * 10000);
 
 
     // переопределяем переменные если надо ============================================================================/
 
     // переопределяем свойства, если это необходимо
-    function setOptions(container){
+    function setOptions(container) {
         // text = jQuery.extend({}, selectors, options.text);
         // selectors = jQuery.extend({}, selectors, options.selectors);
         text.rootTitle = jQuery(container).find(selectors.btnToggle).text();
@@ -481,15 +485,16 @@ function MenuMobile(options){
 
     // работа с деревом ===============================================================================================/
 
-    function buildMenu(nodeRoot){
+    function buildMenu(nodeRoot) {
         var tree = [];
         var _id = 0;
         // задаём корень
-        tree.push({ id: _id, name: text.rootTitle, elementLink: nodeRoot, hasChild: true, parentId: null });
+        tree.push({id: _id, name: text.rootTitle, elementLink: nodeRoot, hasChild: true, parentId: null});
+
         // рекурсивно строим остальное дерево
-        function build(parentNode){
+        function build(parentNode) {
             var parent = jQuery(parentNode.elementLink);
-            var el = parent.find('li').not( parent.find('li li'));
+            var el = parent.find('li').not(parent.find('li li'));
             el.each(function () {
                 _id++;
                 var currNode = {
@@ -497,19 +502,22 @@ function MenuMobile(options){
                     name: jQuery(this).children(selectors.nodeLink).text(),
                     href: jQuery(this).children(selectors.nodeLink).attr('href'),
                     elementLink: jQuery(this),
-                    hasChild:  jQuery(this).attr(selectors.node) != null,
+                    hasChild: jQuery(this).attr(selectors.node) != null,
                     parentId: parentNode.id
                 };
                 tree.push(currNode);
-                if(currNode.hasChild){  build(currNode) }
+                if (currNode.hasChild) {
+                    build(currNode)
+                }
             });
         }
-        build( getNodeRoot(tree) );
+
+        build(getNodeRoot(tree));
 
         return tree;
     }
 
-    function renderMenu(tree){
+    function renderMenu(tree) {
         // console.log(tree);
         jQuery('body').append('' +
             '<menu-mobile class="menu-mobile" id="menu-mobile-' + id + '"></menu-mobile>'
@@ -521,11 +529,11 @@ function MenuMobile(options){
     // вспомогательные ================================================================================================/
 
     // Получения узла по ID
-    function getNodeById(id, tree){
+    function getNodeById(id, tree) {
         var result = null;
         //ищем элемент с заданным id
-        tree.forEach(function(item){
-            if( item.id == id ){
+        tree.forEach(function (item) {
+            if (item.id == id) {
                 result = item;
                 return false;
             }
@@ -535,14 +543,14 @@ function MenuMobile(options){
     }
 
     // Получения корня
-    function getNodeRoot(tree){
+    function getNodeRoot(tree) {
         return getNodeById(0, tree);
     }
 
 
     // Обработка событий ==============================================================================================/
 
-    function addHandlerToggleBtn(container, vueMenuMobile){
+    function addHandlerToggleBtn(container, vueMenuMobile) {
         jQuery(container).on('click', selectors.btnToggle, function () {
             vueMenuMobile.show = true;
             app.helper.scroll.disable();
@@ -560,105 +568,107 @@ function MenuMobile(options){
     // public =========================================================================================================/
     return {
         init: function () {
-            
+
         }
     };
 }
 
-(function( jQuery ){
-	
-	var defaults = {
+(function (jQuery) {
+
+    var defaults = {
         className: '',           			// дополнительный класс если нужен
-		minValue: 0,            			// минимальное допустимое значение
-		maxValue: 1000,          	 		// максимально допустимое значение
-		speedChange: 100,       	 		// скорость изменения значений (мс)
-		stepValue: 1,          	 			// шаг значения 
-		
-		/*пока не работает*/
-		defaultValue: 0,          	 		// значение по умолчанию, если не задано
-		
-		onChange: function(){ }, 			// функция вполняемая после каждого изменения значения инпута
-		onFinalChange: function(){ } 		// функция вполняемая после последнего изменения значения инпута
-    };	
-	
-	var methods = {
-	
-		init : function( options ) { 
+        minValue: 0,            			// минимальное допустимое значение
+        maxValue: 1000,          	 		// максимально допустимое значение
+        speedChange: 100,       	 		// скорость изменения значений (мс)
+        stepValue: 1,          	 			// шаг значения
 
-			options = jQuery.extend({}, defaults, options);
-			
-			this.each(function() {
+        /*пока не работает*/
+        defaultValue: 0,          	 		// значение по умолчанию, если не задано
 
-				var timer;
-				
-				jQuery(this).wrap("<div class='customNumber " + options.className + "'></div>");
-				jQuery(this).after("<span class='plus'>+</span><span class='minus'>-</span>");
-				
-				var container = jQuery(this).parent('.customNumber');
-				var input = jQuery(container).find('input');
-				var minus = jQuery(container).find('.minus');
-				var plus = jQuery(container).find('.plus');
-				
-				jQuery(minus).on('mousedown', function () {
-					var data = input.val()*1;
-					if(data > options.minValue){
-						input.val(data - options.stepValue).change();
-						data = data - options.stepValue;
-						options.onChange();
-					}
-					timer = setInterval(function(){ 
-						if(data > options.minValue){
-							input.val(data - options.stepValue).change();
-							data = data - options.stepValue;
-							options.onChange();
-						}
-					}, options.speedChange);
-				});
-				
-				jQuery(plus).on('mousedown', function () {
-					var data = input.val()*1;
-					if(data < options.maxValue){
-						input.val(data + options.stepValue).change();
-						data = data + options.stepValue;
-						options.onChange();
-					}
-					timer = setInterval(function(){ 
-						if(data < options.maxValue){
-							input.val(data + options.stepValue).change();
-							data = data + options.stepValue;
-							options.onChange();
-						}
-					}, options.speedChange); 
-				});
-				
-				jQuery(container).find('span').on('mouseup mouseleave', function () {	
-					clearInterval(timer);
-					options.onFinalChange();
-				});
+        onChange: function () {
+        }, 			// функция вполняемая после каждого изменения значения инпута
+        onFinalChange: function () {
+        } 		// функция вполняемая после последнего изменения значения инпута
+    };
 
-				
-			});
-		}
-		
-	};
-	 
-	jQuery.fn.customNumber = function(method) {
+    var methods = {
 
-		if ( methods[method] ) {
-			return methods[ method ].apply( this, Array.prototype.slice.call( arguments, 1 ));
-		} else if ( typeof method === 'object' || ! method ) {
-			return methods.init.apply( this, arguments );
-		} else {
-			jQuery.error( 'Метод ' +  method + ' не существует в jQuery.customNumber' );
-		}    
+        init: function (options) {
 
-	};
- 
-})( jQuery );
-var Tables = (function(){
+            options = jQuery.extend({}, defaults, options);
+
+            this.each(function () {
+
+                var timer;
+
+                jQuery(this).wrap("<div class='customNumber " + options.className + "'></div>");
+                jQuery(this).after("<span class='plus'>+</span><span class='minus'>-</span>");
+
+                var container = jQuery(this).parent('.customNumber');
+                var input = jQuery(container).find('input');
+                var minus = jQuery(container).find('.minus');
+                var plus = jQuery(container).find('.plus');
+
+                jQuery(minus).on('mousedown', function () {
+                    var data = input.val() * 1;
+                    if (data > options.minValue) {
+                        input.val(data - options.stepValue).change();
+                        data = data - options.stepValue;
+                        options.onChange();
+                    }
+                    timer = setInterval(function () {
+                        if (data > options.minValue) {
+                            input.val(data - options.stepValue).change();
+                            data = data - options.stepValue;
+                            options.onChange();
+                        }
+                    }, options.speedChange);
+                });
+
+                jQuery(plus).on('mousedown', function () {
+                    var data = input.val() * 1;
+                    if (data < options.maxValue) {
+                        input.val(data + options.stepValue).change();
+                        data = data + options.stepValue;
+                        options.onChange();
+                    }
+                    timer = setInterval(function () {
+                        if (data < options.maxValue) {
+                            input.val(data + options.stepValue).change();
+                            data = data + options.stepValue;
+                            options.onChange();
+                        }
+                    }, options.speedChange);
+                });
+
+                jQuery(container).find('span').on('mouseup mouseleave', function () {
+                    clearInterval(timer);
+                    options.onFinalChange();
+                });
+
+
+            });
+        }
+
+    };
+
+    jQuery.fn.customNumber = function (method) {
+
+        if (methods[method]) {
+            return methods[method].apply(this, Array.prototype.slice.call(arguments, 1));
+        } else if (typeof method === 'object' || !method) {
+            return methods.init.apply(this, arguments);
+        } else {
+            jQuery.error('Метод ' + method + ' не существует в jQuery.customNumber');
+        }
+
+    };
+
+})(jQuery);
+var Tables = (function () {
 
     // private =============================================================
-    wrapTables = function (tableSelector){
+    wrapTables = function (tableSelector) {
         jQuery(tableSelector).each(function () {
             var currTable = jQuery(this);
             // var className = "table-responsive";
@@ -669,7 +679,7 @@ var Tables = (function(){
 
     // public =============================================================
     return {
-        addMobileView: function(tableSelector){
+        addMobileView: function (tableSelector) {
             wrapTables(tableSelector);
         }
     };
@@ -697,7 +707,7 @@ jQuery('.js-spoiler-area').each(function () {
     // кэшируем data-атрибуты, подставляя значения по умолчанию, если атрибуты не заданы
     var btnTextOpened = self.attr('data-text-opened') ? self.attr('data-text-opened') : 'Скрыть',
         btnTextClosed = self.attr('data-text-closed') ? self.attr('data-text-closed') : 'Посмотреть весь текст',
-        btnClass = self.attr('data-btn-class') ? self.attr('data-btn-class') : '' ;
+        btnClass = self.attr('data-btn-class') ? self.attr('data-btn-class') : '';
 
     // добавляем необходимый html
     self.addClass('spoiler__content');
@@ -714,21 +724,21 @@ jQuery('.js-spoiler-area').each(function () {
     // класс добавляется, если у контента есть класс hidden-*
     var classList = content.attr('class').split(/\s+/),
         isResponse = false;
-    jQuery.each(classList, function(index, item) {
-        if (item.substring(0,7) === 'hidden-') {
-            btn.addClass('hidden visible-' + item.substring(7,9));
+    jQuery.each(classList, function (index, item) {
+        if (item.substring(0, 7) === 'hidden-') {
+            btn.addClass('hidden visible-' + item.substring(7, 9));
             isResponse = true;
         }
     });
-    if(!isResponse){
+    if (!isResponse) {
         content.addClass('hidden');
     }
 
     // вешаем события
-    btn.on('click', function(){
+    btn.on('click', function () {
         content.slideToggle();
         btn.toggleClass('is-opened');
-        if(btn.hasClass('is-opened')){
+        if (btn.hasClass('is-opened')) {
             btn.find('span').text(btnTextOpened);
         } else {
             btn.find('span').text(btnTextClosed);
@@ -744,7 +754,7 @@ jQuery('.js-spoiler-items').each(function () {
     // кэшируем data-атрибуты, подставляя значения по умолчанию, если атрибуты не заданы
     var btnTextOpened = self.attr('data-text-opened') ? self.attr('data-text-opened') : 'Скрыть',
         btnTextClosed = self.attr('data-text-closed') ? self.attr('data-text-closed') : 'Смотреть полностью',
-        btnClass = self.attr('data-btn-class') ? self.attr('data-btn-class') : '' ;
+        btnClass = self.attr('data-btn-class') ? self.attr('data-btn-class') : '';
 
     // добавляем необходимый html
     self.addClass('spoiler__content');
@@ -757,9 +767,9 @@ console.time('appjs');
 /*=========================================================================*/
 /* mediaEventListener кастомизируем breakpoint'ы */
 var mediaEventListener = new MediaEventListener([
-    { name: 'mobile',  minResolution: 0,    maxResolution: 980,  isActive: false, isEach: false, callback: [] },
-    { name: 'desktop', minResolution: 981, maxResolution: 1920,  isActive: false, isEach: false, callback: [] },
-    { name: 'resize',  minResolution: 0,    maxResolution: 19200, isActive: false, isEach: true,  callback: [] }
+    {name: 'mobile', minResolution: 0, maxResolution: 980, isActive: false, isEach: false, callback: []},
+    {name: 'desktop', minResolution: 981, maxResolution: 1920, isActive: false, isEach: false, callback: []},
+    {name: 'resize', minResolution: 0, maxResolution: 19200, isActive: false, isEach: true, callback: []}
 ]);
 
 
@@ -779,7 +789,7 @@ Tables.addMobileView('table');
 
     var sliderHeader = {
 
-        carousel : jQuery(".js-slider-header.owl-carousel")
+        carousel: jQuery(".js-slider-header.owl-carousel")
 
     };
 
@@ -789,11 +799,11 @@ Tables.addMobileView('table');
 
         autoplayTimeout: 6000,
 
-        loop:true,
+        loop: true,
 
-        margin:0,
+        margin: 0,
 
-        nav:true,
+        nav: true,
 
         dots: true,
 
@@ -806,18 +816,15 @@ Tables.addMobileView('table');
     });
 
 
-
-
-
 }());
 
 
 /*=========================================================================*/
 /* Window Resize с mediaEventListener */
 // навешиваем скрипты на разные разрешения
-var plusCarousel =  jQuery('.js-plus-list').find('.plus__list');
-mediaEventListener.addQueryAction('mobile', function(){
-    if(!plusCarousel.hasClass('owl-carousel')){
+var plusCarousel = jQuery('.js-plus-list').find('.plus__list');
+mediaEventListener.addQueryAction('mobile', function () {
+    if (!plusCarousel.hasClass('owl-carousel')) {
         jQuery('.js-plus-list').find('.plus__list').addClass('owl-carousel');
         plusCarousel.owlCarousel({
             center: false,
@@ -825,47 +832,47 @@ mediaEventListener.addQueryAction('mobile', function(){
             dots: false,
             loop: true,
             margin: 20,
-            items:3,
+            items: 3,
             responsive: {
                 0: {
-                    items:1
+                    items: 1
                 },
                 368: {
-                    items:2
+                    items: 2
                 },
                 568: {
-                    items:3
+                    items: 3
                 }
             }
         });
     }
 
 });
-mediaEventListener.addQueryAction('desktop', function(){
-    if(plusCarousel.hasClass('owl-carousel')){
+mediaEventListener.addQueryAction('desktop', function () {
+    if (plusCarousel.hasClass('owl-carousel')) {
         plusCarousel.trigger('destroy.owl.carousel').removeClass('owl-carousel owl-loaded');
     }
 
 });
-mediaEventListener.addQueryAction('resize', function(){
+mediaEventListener.addQueryAction('resize', function () {
     // console.log('resize');
 });
 // mediaEventListener.addQueryAction('resize', function(){
 //     console.log('resize');
 //
 
-window.addEventListener('scroll', function() {
-	var scroll = document.documentElement.scrollTop || window.pageYOffset || window.scrollY;
-	//console.log(scroll, app.helper.scroll.direction());
-	if( scroll > 20) {
-		if( app.helper.scroll.direction() === 'down'){
-			jQuery('.header-mobile').addClass('-small');
-		} else {
-			jQuery('.header-mobile').removeClass('-small');
-		}
+window.addEventListener('scroll', function () {
+    var scroll = document.documentElement.scrollTop || window.pageYOffset || window.scrollY;
+    //console.log(scroll, app.helper.scroll.direction());
+    if (scroll > 20) {
+        if (app.helper.scroll.direction() === 'down') {
+            jQuery('.header-mobile').addClass('-small');
+        } else {
+            jQuery('.header-mobile').removeClass('-small');
+        }
     } else {
-		jQuery('.header-mobile').removeClass('-small');
-	}
+        jQuery('.header-mobile').removeClass('-small');
+    }
 });
 
 (function () {
@@ -875,9 +882,9 @@ window.addEventListener('scroll', function() {
         jQuery('.header-mobile__switch-elements').removeClass('is-active');
     });
     jQuery('.header-mobile__toolbar-item').on('click', function () {
-        var className = jQuery(this).data('class') ;
+        var className = jQuery(this).data('class');
 
-        if ( !jQuery('.header-mobile__element.' + className).hasClass('is-active') ){
+        if (!jQuery('.header-mobile__element.' + className).hasClass('is-active')) {
             setTimeout(function () {
                 jQuery('.header-mobile__element.' + className).addClass('is-active');
                 jQuery('.header-mobile__switch-elements').addClass('is-active');
@@ -889,10 +896,10 @@ window.addEventListener('scroll', function() {
         jQuery('.header-mobile__toolbar-item').removeClass('is-active');
     });
     //
-    jQuery('.header-mobile__element.-menu').append( jQuery('.menu-top').clone() );
-    jQuery('.header-mobile__element.-cart').append( jQuery('.header-top__cart').clone() );
-    jQuery('.header-mobile__element.-search').append( jQuery('.form-search').clone() );
-    jQuery('.header-mobile__element.-phone').append( jQuery('.header-top__left-block').clone() );
+    jQuery('.header-mobile__element.-menu').append(jQuery('.menu-top').clone());
+    jQuery('.header-mobile__element.-cart').append(jQuery('.header-top__cart').clone());
+    jQuery('.header-mobile__element.-search').append(jQuery('.form-search').clone());
+    jQuery('.header-mobile__element.-phone').append(jQuery('.header-top__left-block').clone());
     //
     jQuery('.header-mobile__form').on('click', function () {
         event.stopPropagation();
@@ -909,22 +916,23 @@ jQuery('.js-print-page').on('click', function () {
 /***************************************************************************/
 
 jQuery(document).on('click', '.js-scroll-top', function () {
-    jQuery("body:not(:animated)").animate({ scrollTop: 0 }, 500);
-    jQuery("html").animate({ scrollTop: 0 }, 500);
+    jQuery("body:not(:animated)").animate({scrollTop: 0}, 500);
+    jQuery("html").animate({scrollTop: 0}, 500);
     return false;
 });
 
-jQuery(window).scroll(function(){
-    if (jQuery(this).scrollTop()>105 && true ){
-        jQuery(".js-scroll-top").css({"display":"block"});
+jQuery(window).scroll(function () {
+    if (jQuery(this).scrollTop() > 105 && true) {
+        jQuery(".js-scroll-top").css({"display": "block"});
     } else {
-        jQuery(".js-scroll-top").css({"display":"none"});
+        jQuery(".js-scroll-top").css({"display": "none"});
     }
 });
 jQuery('.menu-left .has-dropdown > a').on('click', function () {
     var parent = jQuery(this).parent();
     var dropdown = jQuery(this).next();
-    if(parent.hasClass('is-open')){
+
+    if (parent.hasClass('is-open')) {
         dropdown.slideToggle();
         parent.removeClass('is-open');
     } else {
@@ -934,12 +942,13 @@ jQuery('.menu-left .has-dropdown > a').on('click', function () {
     return false;
 });
 
+
 (function productsWidget() {
     jQuery(".js-product-carousel").each(function () {
         var productsWidget = {
-            carousel : jQuery(this).find(".owl-carousel"),
-            nextBtn : jQuery(this).find(".js-nav-next"),
-            prevBtn : jQuery(this).find(".js-nav-prev")
+            carousel: jQuery(this).find(".owl-carousel"),
+            nextBtn: jQuery(this).find(".js-nav-next"),
+            prevBtn: jQuery(this).find(".js-nav-prev")
         };
         productsWidget.carousel.owlCarousel({
             center: false,
@@ -948,11 +957,11 @@ jQuery('.menu-left .has-dropdown > a').on('click', function () {
             loop: true,
             autoWidth: true,
             margin: 20,
-            items:3,
+            items: 3,
             responsive: {
                 0: {
                     dots: false,
-                    items:1,
+                    items: 1,
                     margin: 15
                 },
                 480: {
@@ -961,10 +970,10 @@ jQuery('.menu-left .has-dropdown > a').on('click', function () {
                 }
             }
         });
-        productsWidget.nextBtn.click(function() {
+        productsWidget.nextBtn.click(function () {
             productsWidget.carousel.trigger('next.owl.carousel');
         });
-        productsWidget.prevBtn.click(function() {
+        productsWidget.prevBtn.click(function () {
             productsWidget.carousel.trigger('prev.owl.carousel');
         });
     });
@@ -978,16 +987,15 @@ jQuery('input[type="number"]').not('.cart input[type="number"]').customNumber();
 jQuery('.cart input[type="number"]').customNumber();
 
 // обновление при изменении
-jQuery('.cart input[type="number"]').on('change', function(){
+jQuery('.cart input[type="number"]').on('change', function () {
     document.updateCart.submit();
 });
-
 
 
 (function videosWidget() {
     jQuery(".js-homepage-bottom-videos").each(function () {
         var videosWidget = {
-            carousel : jQuery(this).find(".owl-carousel")
+            carousel: jQuery(this).find(".owl-carousel")
         };
         videosWidget.carousel.owlCarousel({
             center: false,
@@ -996,19 +1004,19 @@ jQuery('.cart input[type="number"]').on('change', function(){
             loop: false,
             autoWidth: false,
             margin: 20,
-            items:3,
+            items: 3,
             responsive: {
                 0: {
                     dots: true,
-                    items:1
+                    items: 1
                 },
                 568: {
                     dots: true,
-                    items:2
+                    items: 2
                 }
                 ,
                 960: {
-                    items:3
+                    items: 3
                 }
             }
         });
@@ -1019,10 +1027,10 @@ jQuery('.cart input[type="number"]').on('change', function(){
 (function productsImagesWidget() {
     jQuery(".js-product-images-carousel").each(function () {
         var productsImagesWidget = {
-            carousel : jQuery(this).find(".owl-carousel"),
-            items : jQuery(this).find('.image-prev__item'),
-            nextBtn : jQuery(this).find(".js-nav-next"),
-            prevBtn : jQuery(this).find(".js-nav-prev")
+            carousel: jQuery(this).find(".owl-carousel"),
+            items: jQuery(this).find('.image-prev__item'),
+            nextBtn: jQuery(this).find(".js-nav-next"),
+            prevBtn: jQuery(this).find(".js-nav-prev")
         };
         productsImagesWidget.carousel.owlCarousel({
             center: false,
@@ -1031,12 +1039,12 @@ jQuery('.cart input[type="number"]').on('change', function(){
             loop: true,
             autoWidth: false,
             margin: 10,
-            items:3
+            items: 3
         });
-        productsImagesWidget.nextBtn.click(function() {
+        productsImagesWidget.nextBtn.click(function () {
             productsImagesWidget.carousel.trigger('next.owl.carousel');
         });
-        productsImagesWidget.prevBtn.click(function() {
+        productsImagesWidget.prevBtn.click(function () {
             productsImagesWidget.carousel.trigger('prev.owl.carousel');
         });
 
@@ -1053,7 +1061,7 @@ jQuery('.ordering__item').on('click', '.ordering__item-title', function () {
     var self = jQuery(this);
     var parent = self.parent();
     var content = parent.find('.ordering__item-content');
-    if( self.hasClass('is-active')) {
+    if (self.hasClass('is-active')) {
         self.removeClass('is-active');
         content.hide();
     } else {
@@ -1064,21 +1072,21 @@ jQuery('.ordering__item').on('click', '.ordering__item-title', function () {
 });
 
 jQuery('.js-callback').on('click', function (event) {
-	if( window.innerWidth < 1024 ){
-	event.preventDefault();
-	event.stopPropagation();
-	}
-    jQuery('.overlay').addClass('is-active'); 
+    if (window.innerWidth < 1024) {
+        event.preventDefault();
+        event.stopPropagation();
+    }
+    jQuery('.overlay').addClass('is-active');
 });
 jQuery('.overlay__content, .overlay__heading').on('click', function (event) {
-	if( window.innerWidth < 1024 ){
-	event.stopPropagation();
-	}
-	
+    if (window.innerWidth < 1024) {
+        event.stopPropagation();
+    }
+
 });
 
 jQuery('body').on('click', '.overlay__close', function () {
-	console.log('overlay__close');
+    console.log('overlay__close');
     jQuery('.overlay').removeClass('is-active');
 });
 jQuery('body').on('click', '.overlay__bg', function () {
@@ -1103,7 +1111,7 @@ var masonry = jQuery('.news-page').masonry({
     gutter: 10
 });
 // layout Masonry after each image loads
-masonry.imagesLoaded().progress( function() {
+masonry.imagesLoaded().progress(function () {
     masonry.masonry('layout');
 });
 

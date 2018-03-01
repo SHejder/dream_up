@@ -39,10 +39,10 @@ class jshopCart
     function loadCartDataFromSession()
     {
         $session = JFactory::getSession();
-        $cookie = JFactory::getApplication()->input->cookie;
+//        $cookie = JFactory::getApplication()->input->cookie;
         $objcart = $session->get($this->type_cart);
-        $cart_from_cookie = $cookie->get($this->type_cart);
-
+        $cart_from_cookie = $_COOKIE[$this->type_cart];
+        echo $cart_from_cookie;
         if (isset($objcart) && $objcart != '') {
             $object= $objcart;
         } elseif (isset($cart_from_cookie) && $cart_from_cookie != '') {
@@ -55,6 +55,9 @@ class jshopCart
             $this->rabatt_value = $temp_cart->rabatt_value;
             $this->rabatt_type = $temp_cart->rabatt_type;
             $this->rabatt_summ = $temp_cart->rabatt_summ;
+
+
+
         }
 
     }

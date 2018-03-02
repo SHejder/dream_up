@@ -42,7 +42,7 @@ class jshopCart
 //        $cookie = JFactory::getApplication()->input->cookie;
         $objcart = $session->get($this->type_cart);
         $cart_from_cookie = $_COOKIE[$this->type_cart];
-        echo $cart_from_cookie;
+//        echo $cart_from_cookie;
         if (isset($objcart) && $objcart != '') {
             $object= $objcart;
         } elseif (isset($cart_from_cookie) && $cart_from_cookie != '') {
@@ -1353,7 +1353,7 @@ class jshopCart
         $session = JFactory::getSession();
         $session->set($this->type_cart, serialize($this));
         $cookie = JFactory::getApplication()->input->cookie;
-        $cookie->set($this->type_cart, serialize($this), time() + (7 * 24 * 60 * 60));
+        $cookie->set($this->type_cart, serialize($this), time() + (7 * 24 * 60 * 60),"/");
 
         $tempcart = JSFactory::getModel($this->model_temp_cart, 'jshop');
         $tempcart->insertTempCart($this);

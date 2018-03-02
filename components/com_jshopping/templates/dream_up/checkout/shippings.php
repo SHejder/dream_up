@@ -21,12 +21,13 @@ defined('_JEXEC') or die('Restricted access');
                 <?php print $this->_tmp_ext_html_shipping_start ?>
                 <div class="form__item -radio-text">
                     <?php foreach ($this->shipping_methods as $shipping) { ?>
+
                         <label class="custom-radio">
                             <input type="radio" name="sh_pr_method_id"
                                    id="shipping_method_<?php print $shipping->sh_pr_method_id ?>"
                                    value="<?php print $shipping->sh_pr_method_id ?>"
                                    <?php if ($shipping->sh_pr_method_id == $this->active_shipping){ ?>checked="checked"<?php } ?>
-                                   onclick="showShippingForm(<?php print $shipping->shipping_id ?>)"/>
+                                   />
                             <span><?php print $shipping->name ?> (<?php print formatprice($shipping->calculeprice); ?>)</span>
                         </label>
                         <?php print $shipping->description ?>
@@ -63,9 +64,23 @@ defined('_JEXEC') or die('Restricted access');
                             <?php } ?>
                     <?php } ?>
                 </div>
-
                 <?php print $this->_tmp_ext_html_shipping_end ?>
-                <input type="submit" class="btn btn-primary button" value="<?php print _JSHOP_NEXT ?>"/>
+
+                <script>function checkDeliveryAddress()
+                    {
+                        var checkResult = true;
+                        var shippingMethod = document.getElementById('shipping_method_' + document.shipping_form.sh_pr_method_id.value).nextSibling.nextSibling.innerText;
+                        shippingMethod = shippingMethod.substr(0, shippingMethod.indexOf(' ('));
+                        if ((shippingMethod != 'Самовывоз') && (shippingMethod != 'ТК «Деловые линии»') && (sessionStorage.getItem('deliveryAddress') == '0'))
+                        {
+                            alert('Вы выбрали доставку на Ваш адрес, но не указали его на предыдущем шаге!');
+                            checkResult = false;
+                        };
+                        return checkResult;
+                    };
+                </script>
+
+                <input type="submit" class="btn btn-primary button" value="<?php print _JSHOP_NEXT ?>" onclick="return checkDeliveryAddress();"/>
             </form>
         </div>
     </div>

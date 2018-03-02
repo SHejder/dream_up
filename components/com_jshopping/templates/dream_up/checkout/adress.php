@@ -144,7 +144,13 @@ defined('_JEXEC') or die('Restricted access');
                     <span>Я согласен на обработку персональных данных. <a href="">Политика конфиденциальности</a></span>
                 </label>
             </div>
-            <button onclick="return checkAGBAndNoReturn('0','0');" class="homepage-bottom__form-btn btn" type="submit">Отправить</button>
+            <script>function saveDeliveryAddress()
+                {
+                    sessionStorage.setItem('deliveryAddress', document.loginForm.delivery_adress.value);
+                    return true;
+                };
+            </script>
+            <button onclick="return saveDeliveryAddress();" class="homepage-bottom__form-btn btn" type="submit">Отправить</button>
         </form>
     </div>
 

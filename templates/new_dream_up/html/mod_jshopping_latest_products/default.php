@@ -34,7 +34,7 @@ for ($i=0 ;$i < count($in->products);$i++ ) {
                 <?php print $product->_tmp_var_bottom_foto; ?>
 
             </div>
-            <form name="product" method="post"
+            <form name="product" method="post" class="ajax"
                   action="?option=com_jshopping&amp;controller=cart&amp;task=add&amp;Itemid=0"
                   enctype="multipart/form-data" autocomplete="off">
 
@@ -69,7 +69,7 @@ for ($i=0 ;$i < count($in->products);$i++ ) {
                                onclick="jQuery('#to').val('cart');"/>
                     <?php } ?>
                 <?php } ?>
-
+                <input type="hidden" name="ajax"  value="1"/>
                 <input type="hidden" name="to" id='to' value="cart"/>
                 <input type="hidden" name="product_id" id="product_id" value="<?php print $product->product_id ?>"/>
                 <input type="hidden" name="category_id" id="category_id" value="<?php print $product->category_id; ?>"/>

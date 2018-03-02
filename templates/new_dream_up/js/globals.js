@@ -1,5 +1,5 @@
 // Constants
-var AJAX_LOADER  = '<img src="/templates/new_dream_up/images/loader.svg" width="20" height="20">';
+var AJAX_LOADER = '<img src="/templates/new_dream_up/images/loader.svg" width="20" height="20">';
 var NOTY_TIMEOUT = 1000;
 
 // Functions
@@ -11,8 +11,8 @@ var notify = function (text, type) {
     type = type || 'success';
 
     new Noty({
-        text:    Translator.trans(text),
-        type:    type,
+        text: Translator.trans(text),
+        type: type,
         timeout: NOTY_TIMEOUT
     }).show();
 };
@@ -25,81 +25,29 @@ var onAjaxFail = function (jqXHR) {
 };
 
 var ajaxSubmit = function (form) {
-    var $form = $(form);
+    var $form = jQuery(form);
 
-    var $submit       = $form.find('button[type="submit"]:first');
-    var submitContent = null;
-
-    if ($submit.length) {
-        submitContent = $submit.html();
-        $submit.html(AJAX_LOADER);
-    }
-
-    if($form.data('button-id') !== undefined)
-    {
-        var $submit_link       = $('#'+$form.data('button-id'));
-        var submitLinkContent = null;
-        if($submit_link !== undefined){
-            if ($submit_link.length) {
-                submitLinkContent = $submit_link.html();
-                $submit_link.html(AJAX_LOADER);
-            }
-        }
-    }
-
-    $.ajax({
-        url:         $form.attr('action'),
-        dataType:   "json",
-        type:        $form.attr('method'),
-        data:        new FormData($form[0]),
+    jQuery.ajax({
+        url: $form.attr('action'),
+        dataType: 'json',
+        type: $form.attr('method'),
+        data: new FormData($form[0]),
         processData: false,
         contentType: false
-    }).done(
-        /**
-         * @param data.html
-         * @param data.message
-         * @param data.redirectUrl
-         * @param data.success
-         */
+    }).always(
         function (data) {
-            notify(data.message, data.success ? 'success' : 'error');
-            console.log();
-            if (data.redirectUrl) {
-                setTimeout(function () {
-                    location.href = data.redirectUrl;
-                }, NOTY_TIMEOUT);
-
-                return;
+            console.log(data);
+            if (Array.isArray(data)) {
+                alert(data[0]['message']);
             }
-            if (data.success) {
-                var event = new $.Event('app.ajaxSubmit');
-
-                $form.trigger(event, data);
-
-                if (event.isDefaultPrevented()) {
-                    return;
-                }
+            else if (data.type_cart !== undefined) {
+                jQuery('.header-top__cart-cost').text(data.price_product + ' ₽');
+                jQuery('.header-top__cart-count').text(data.count_product + ' шт');
+                alert('Товар добавлен в корзину!');
+            } else {
+                alert ('что то не так');
             }
-            if (data.html) {
-                var $html = $(data.html);
-                var $replacement = $html.is('form') ? $html : $html.find('form:first');
 
-                $form.replaceWith($replacement.length ? $replacement : $html);
-            }
-        }
-    ).always(function () {
-        $form.removeData('submitted');
 
-        if ($submit.length) {
-            $submit.html(submitContent);
-        }
-
-        if($form.data('button-id') !== undefined)
-        {
-            if($submit_link !== undefined){
-                $submit_link.html(submitLinkContent);
-            }
-        }
-
-    }).fail(onAjaxFail);
+        })
 };

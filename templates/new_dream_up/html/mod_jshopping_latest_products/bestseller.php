@@ -18,6 +18,7 @@ for ($i=0 ;$i < count($in->products);$i++ ) {
 }
 
 
+
 addLinkToProducts($data_row, 0, 1);
 
 
@@ -52,7 +53,7 @@ addLinkToProducts($data_row, 0, 1);
 
             </div>
 
-            <form name="product" method="post"
+            <form name="product" method="post" class="ajax"
                   action="?option=com_jshopping&amp;controller=cart&amp;task=add&amp;Itemid=0"
                   enctype="multipart/form-data" autocomplete="off">
 
@@ -79,6 +80,7 @@ addLinkToProducts($data_row, 0, 1);
 
                 </div>
                 <?php if (!$hide_buy) { ?>
+
                     <?php if (in_array($product->product_id, $cart_prod)) { ?>
                         <input type="submit" class="product__buy add_more" value="ДОБАВИТЬ ЕЩЕ"
                                onclick="jQuery('#to').val('cart');"/>
@@ -88,7 +90,7 @@ addLinkToProducts($data_row, 0, 1);
                                onclick="jQuery('#to').val('cart');"/>
                     <?php } ?>
                 <?php } ?>
-
+                <input type="hidden" name="ajax"  value="1"/>
                 <input type="hidden" name="to" id='to' value="cart"/>
                 <input type="hidden" name="product_id" id="product_id"
                        value="<?php print $product->product_id ?>"/>

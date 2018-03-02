@@ -5079,3 +5079,21 @@ iframe{
 	}
 }
 
+select{
+	display: block;
+    width: 100%;
+	max-width: 290px;
+	height: 34px;
+    padding-left: 15px;
+    padding-right: 15px;
+    border: 2px solid #e1eaee;
+    border-radius: 5px;
+    font-family: "Roboto", sans-serif;
+    font-size: 14px;
+    color: #43505e;
+    font-weight: bold;
+    background: #fff;
+
+    -webkit-transition: 0.2s ease-in-out 0s;
+    transition: 0.2s ease-in-out 0s;
+}

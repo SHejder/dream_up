@@ -904,6 +904,9 @@ window.addEventListener('scroll', function () {
     jQuery('.header-mobile__form').on('click', function () {
         event.stopPropagation();
     });
+	jQuery('.form-search').on('click', function () {
+        event.stopPropagation();
+    });
 })();
 
 

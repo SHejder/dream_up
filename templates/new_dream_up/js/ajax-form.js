@@ -24,8 +24,6 @@ jQuery(document).ready(function () {
         var $form = jQuery(this);
 
         ajaxSubmit($form.data('submitted', true));
-        $form.find('.product__buy').addClass('add_more');
-        $form.find('.product__buy').val('ДОБАВИТЬ ЕЩЕ');
         // return false;
 
     });

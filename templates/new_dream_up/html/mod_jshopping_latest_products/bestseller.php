@@ -16,6 +16,15 @@ $cart_prod=[];
 for ($i=0 ;$i < count($in->products);$i++ ) {
     $cart_prod[$i]=$in->products[$i]['product_id'];
 }
+//$session = JFactory::getSession();
+//$objcart = $session->get('cart');
+//$in_cart = unserialize($objcart);
+//$in = jshopCart::reCreate($in_cart);
+//
+//$cart_prod = [];
+//for ($i = 0; $i < count($in->products); $i++) {
+//    $cart_prod[$i] = $in->products[$i]['product_id'];
+//}
 
 
 

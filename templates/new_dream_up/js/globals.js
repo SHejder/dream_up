@@ -44,6 +44,9 @@ var ajaxSubmit = function (form) {
                 jQuery('.header-top__cart-cost').text(data.price_product + ' ₽');
                 jQuery('.header-top__cart-count').text(data.count_product + ' шт');
                 alert('Товар добавлен в корзину!');
+                $form.find('.product__buy').addClass('add_more');
+                $form.find('.product__buy').val('ДОБАВИТЬ ЕЩЕ');
+
             } else {
                 alert ('что то не так');
             }

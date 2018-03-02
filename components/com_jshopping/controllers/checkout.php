@@ -77,7 +77,7 @@ class JshoppingControllerCheckout extends JshoppingControllerBase{
         $dispatcher->trigger('onBeforeDisplayCheckoutStep2View', array(&$view));
         $view->display();
     }
-    
+
     function step2save(){
 		$jshopConfig = JSFactory::getConfig();
 		$dispatcher = JDispatcher::getInstance();

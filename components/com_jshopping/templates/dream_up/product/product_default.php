@@ -101,7 +101,7 @@ $messages = JFactory::getApplication()->getMessageQueue();
         <?php print $this->_tmp_product_html_before_buttons; ?>
         <?php if (!$this->hide_buy) { ?>
 
-            <form name="product" method="post" action="<?php print $this->action ?>"
+            <form name="product" method="post" class="ajax" action="<?php print $this->action ?>"
                   enctype="multipart/form-data"
                   autocomplete="off">
 
@@ -141,6 +141,8 @@ $messages = JFactory::getApplication()->getMessageQueue();
                     <?php print $this->_tmp_product_html_buttons; ?>
 
                 </div>
+                <input type="hidden" name="ajax"  value="1"/>
+
                 <input type="hidden" name="to" id='to' value="cart"/>
                 <input type="hidden" name="product_id" id="product_id"
                        value="<?php print $this->product->product_id ?>"/>

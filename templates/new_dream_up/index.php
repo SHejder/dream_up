@@ -27,7 +27,7 @@ $urls=array('/katalog/cart/view','/component/users/','/katalog/checkout/step2',
     <!--[if lt IE 9]>
     <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
-
+    <script src='https://www.google.com/recaptcha/api.js'></script>
 </head>
 <body class="<?php if ($is_home_page) { ?>homepage<?php } else { ?>inner-page<?php } ?> <?php if (($menu->getActive()->title == "Вход в личный кабинет") || in_array(JFactory::getURI()->getPath(),$urls))  { ?>head-over-heels<?php } ?>">
 <!-- WRAPPER begin -->

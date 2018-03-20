@@ -50,6 +50,7 @@ JHtml::_('behavior.formvalidator');
             <input type="hidden" name="id" value="<?php echo $this->contact->slug; ?>"/>
             <?php echo JHtml::_('form.token'); ?>
         </div>
+        <div class="g-recaptcha" data-sitekey="6LfJwE0UAAAAAFlrvixKHHqfR4fLdrjW1Y9H3spi"></div>
     </form>
 
 </div><!-- homepage-bottom__form end -->

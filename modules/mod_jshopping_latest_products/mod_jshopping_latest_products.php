@@ -62,7 +62,7 @@
     $rows = $db->loadObjectList();
     $rows = listProductUpdateData($rows);  
     
-    //$rows = $product->getLastProducts($params->get('count_products', 4), $cat_arr);   
+    $rows = $product->getLastProducts($params->get('count_products', 4), $cat_arr);
     
 	addLinkToProducts($rows, 0, 1);
 	

@@ -52,6 +52,8 @@ if (is_array($messages)) {
             $i = 1;
             foreach ($this->products as $key_id => $prod) {
                 ?>
+<!--                --><?php //var_dump($prod["attributes_value"])?>
+<!--                --><?php //var_dump($prod["attributes_value"][0]->value)?>
                 <tr <?php if ($i % 2 == 0) print "even"; else print "odd"; ?>>
                     <td data-text="Изображение:">
                         <a href="<?php print $prod['href']; ?>" class="cart__prev">
@@ -62,7 +64,12 @@ if (is_array($messages)) {
                     </td>
                     <td data-text="Название:">
                         <a href="<?php print $prod['href']; ?>"
-                           class="cart__name"><?php print $prod['product_name']; ?></a>
+                           class="cart__name">
+                            <?php print $prod['product_name']; ?>
+                            <?php if ($prod["attributes_value"][0]->attr_id === 4 && $prod["attributes_value"][0]->attr_id) {?>
+                            (<?php print $prod["attributes_value"][0]->value; ?>)
+                            <?php } ?>
+                        </a>
                     </td>
                     <td data-text="Цена за единицу:">
                         <?php print formatprice($prod['price']); ?>

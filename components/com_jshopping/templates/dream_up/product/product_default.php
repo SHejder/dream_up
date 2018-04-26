@@ -86,15 +86,17 @@ $messages = JFactory::getApplication()->getMessageQueue();
     <div class="product-cart__text">
         <div class="product-cart__price">
             <?php if ($this->product->product_old_price > 0) { ?>
-                <span class="product-cart__price-old">
+                <span class="product-cart__price-old" id="old_price">
                     <?php print formatprice($this->product->product_old_price) ?>
                     <?php print $this->product->_tmp_var_old_price_ext; ?>
                 </span>
             <?php } ?>
-
             <?php if ($this->product->_display_price) { ?>
+                <span id="block_price">
                 <?php print formatprice($this->product->getPriceCalculate()) ?>
                 <?php print $this->product->_tmp_var_price_ext; ?>
+                </span>
+
             <?php } ?>
         </div>
         <?php print $this->product->_tmp_var_bottom_allprices; ?>
@@ -108,6 +110,7 @@ $messages = JFactory::getApplication()->getMessageQueue();
                 <!--        АТРИБУТЫ ТОВАРА-->
                 <?php if (count($this->attributes)) { ?>
                     <?php foreach ($this->attributes as $attribut) { ?>
+                        <!--                        --><?php //var_dump($attribut) ?>
                         <span class="attributes_name"><?php print $attribut->attr_name ?>:</span><span
                                 class="attributes_description"><?php print $attribut->attr_description; ?></span>
                         <span id='block_attr_sel_<?php print $attribut->attr_id ?>'>
@@ -141,7 +144,7 @@ $messages = JFactory::getApplication()->getMessageQueue();
                     <?php print $this->_tmp_product_html_buttons; ?>
 
                 </div>
-                <input type="hidden" name="ajax"  value="1"/>
+                <input type="hidden" name="ajax" value="1"/>
 
                 <input type="hidden" name="to" id='to' value="cart"/>
                 <input type="hidden" name="product_id" id="product_id"
@@ -175,6 +178,7 @@ $messages = JFactory::getApplication()->getMessageQueue();
 
     <?php print $this->_tmp_product_html_end; ?>
 </div>
+
 
 
 

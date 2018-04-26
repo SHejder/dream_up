@@ -36,11 +36,15 @@ $send_button_after = $params->get('send_button_after');
 
 $input_name_required = $params->get('input_name_required');
 $input_phone_required = $params->get('input_phone_required');
+
+JPluginHelper::importPlugin('captcha');
+$dispatcher = JDispatcher::getInstance();
+$dispatcher->trigger('onInit','dynamic_recaptcha_2');
 ?>
 
 
 <?php
-    if($_POST["cmbf-phone-".$id_module]) {
+    if($_POST["cmbf-phone-".$id_module] && $_POST["sp-text"] == '') {
 
         $cmbf_phone = $_POST["cmbf-phone-".$id_module];
         $cmbf_name = $_POST["cmbf-name-".$id_module];
@@ -105,8 +109,10 @@ $input_phone_required = $params->get('input_phone_required');
                                 <span>Я согласен на обработку персональных данных. <a href="">Политика конфиденциальности</a></span>
                             </label>
                         </div>
+                        <input name="sp-text" style="display: none" >
                         <input class="contacts__form-btn btn" type="submit" name="submit-<?php echo $id_module; ?>" value="<?php echo $send_button; ?>">
                     </div>
+
                     <div class="cmbf-success">
                         <?php echo $form_thanks; ?>
                     </div>

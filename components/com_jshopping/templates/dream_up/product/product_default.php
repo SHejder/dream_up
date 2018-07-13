@@ -8,7 +8,7 @@
  */
 defined('_JEXEC') or die('Restricted access');
 $product = $this->product;
-include(dirname(__FILE__) . "/load.js.php");
+//include(dirname(__FILE__) . "/load.js.php");
 require_once(dirname(__FILE__) . '/../../../models/cart.php');
 
 
@@ -31,6 +31,9 @@ $messages = JFactory::getApplication()->getMessageQueue();
 
 
 <div class="product-cart">
+    <?php
+    include(dirname(__FILE__) . "/load.js.php");
+    ?>
     <div class="product-cart__images">
         <div class="product-cart__image-big">
             <?php print $this->_tmp_product_html_body_image ?>
